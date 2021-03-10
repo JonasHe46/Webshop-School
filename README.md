@@ -1,3 +1,2 @@
-# Webshop
 
-LOL XD ROFL
+Wir bauen eine Webshop!
