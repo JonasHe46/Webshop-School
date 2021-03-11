@@ -1,0 +1,189 @@
+:root {
+    --primary:  #666666;
+    --white: #ffffff; 
+  } 
+  
+  .fTLogo {
+    width: 5%;
+    float: left;
+  }
+  
+  body {
+    font: 400 15px Lato, sans-serif;
+    line-height: 1.8;
+    color: #818181;
+  }
+  h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #303030;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+  h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    color: #303030;
+    font-weight: 400;
+    margin-bottom: 30px;
+  }  
+  .jumbotron {
+    background-color: var(--primary);
+    color: #fff;
+    padding: 100px 25px;
+    font-family: Montserrat, sans-serif;
+  }
+  .container-fluid {
+    padding: 60px 50px;
+  }
+  .bg-grey {
+    background-color: #f6f6f6;
+  }
+  .navbar {
+    margin-bottom: 0;
+    background-color: var(--primary);
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+    font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    color: var(--primary) !important;
+    background-color: #fff !important;
+  }
+  .navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+  }
+  
+  @keyframes slide {
+    0% {
+      opacity: 0;
+      transform: translateY(70%);
+    } 
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  @-webkit-keyframes slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    } 
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    .fTLogo {
+      display: none;
+    }
+    .fTLogoText {
+      display: none;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+    .btn-lg {
+      width: 100%;
+      margin-bottom: 35px;
+    }
+    .fTLogo {
+      display: none;
+    }
+    .fTLogoText {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .logo {
+      font-size: 150px;
+    }
+    .fTLogo {
+      display: none;
+    }
+    .fTLogoText {
+      display: none;
+    }
+  }
+  
+  
+  
+  
+  .DatneschutzBanner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2147483645;
+    box-sizing: border-box;
+    width: 100%;
+  
+    background-color: #F1F6F4;
+  }
+  
+  .DatneschutzBannerInner {     
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 0;
+  }
+  
+  .DatneschutzBannerCopy { 
+    margin-bottom: 16px;
+  }
+  
+  
+  .DatneschutzBannerHeader {
+    margin-bottom: 8px;
+    
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  .DatneschutzBannerDescription {
+    font-weight: normal;
+    color: #838F93;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  
+  
+  .DatneschutzBannerBtn {
+    background-color: var(--primary);
+    border: none;
+    color: white;
+    min-width: 164px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+  
+  .DatneschutzBannerBtn:hover {
+    background-color: #20BA68;
+  } 
+  
+  .dNone {
+    display: none;
+  }
+  
+  .dE {
+    color: black;
+  }
