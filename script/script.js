@@ -53,3 +53,7 @@ $(document).ready(function(){
      element.classList.add("dNone");
     }
     
+
+    function loginFn() {
+        alert("Funk")
+    }
