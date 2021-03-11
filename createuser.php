@@ -1,10 +1,10 @@
 <?php
-    include_once('db.php');
+    include 'db.php';
 
     $name = $_POST['name'];
-    $name = $_POST['password'];
+    $pass = $_POST['password'];
 
-    if(mysql_query("INSERT INTO webshop VALUES('$Username','$Password')";))
+    if($conn->query("INSERT INTO webshop (U_Username, U_Password) VALUES ('$name','$pass')";))
         echo "User wurde angelegt";
     else   
         echo "User wurde nicht angelegt bitte versuchen sie es erneut.";

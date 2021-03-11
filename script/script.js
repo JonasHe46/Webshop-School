@@ -1,25 +1,3 @@
-
-        $(document).ready(function(){
-            $("form").submit(function(event){
-                event.preventDefault();
-                var name = $("#username").val();
-                var password = $("userpassword").val();
-                var submit = $("userdatasend");
-                $(".form-message").load("createuser.php",{
-                    name: name,
-                    password: password,
-                    submit: submit
-                });
-            });
-        });
-
-
-
-
-
-
-
-
 $(document).ready(function(){
     $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
       if (this.hash !== "") {
