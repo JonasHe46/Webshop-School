@@ -453,3 +453,7 @@ body{margin-top:20px;
     color: pink;
   }
   
+.sC:hover {
+  color: white;
+  cursor: pointer;
+}
