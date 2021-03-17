@@ -190,7 +190,7 @@
 
 
   /* login */
-  .login-container{
+.login-container{
     margin-top: 5%;
     margin-bottom: 5%;
 }
@@ -241,4 +241,10 @@
     color: #0062cc;
     font-weight: 600;
     text-decoration: none;
+}
+
+
+
+.logInBtn {
+    margin-top: .5em !important;
 }
