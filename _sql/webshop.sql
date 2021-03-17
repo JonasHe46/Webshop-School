@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 17. Mrz 2021 um 09:58
+-- Erstellungszeit: 17. Mrz 2021 um 11:13
 -- Server-Version: 10.4.17-MariaDB
--- PHP-Version: 8.0.2
+-- PHP-Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,9 +57,9 @@ INSERT INTO `artikel` (`A_ID`, `A_Name`, `A_Beschreibung`, `A_Preis`, `A_Bild`, 
 
 CREATE TABLE `benutzer` (
   `U_ID` int(11) NOT NULL,
-  `U_Username` varchar(30) COLLATE utf8_bin NOT NULL,
-  `U_Password` text COLLATE utf8_bin NOT NULL,
-  `Straße` varchar(50) COLLATE utf8_bin NOT NULL,
+  `Username` varchar(30) COLLATE utf8_bin NOT NULL,
+  `Password` text COLLATE utf8_bin NOT NULL,
+  `Strasse` varchar(50) COLLATE utf8_bin NOT NULL,
   `Hausnummer` int(11) NOT NULL,
   `Ort` varchar(50) COLLATE utf8_bin NOT NULL,
   `Plz` int(11) NOT NULL
@@ -69,7 +69,7 @@ CREATE TABLE `benutzer` (
 -- Daten für Tabelle `benutzer`
 --
 
-INSERT INTO `benutzer` (`U_ID`, `U_Username`, `U_Password`, `Straße`, `Hausnummer`, `Ort`, `Plz`) VALUES
+INSERT INTO `benutzer` (`U_ID`, `Username`, `Password`, `Strasse`, `Hausnummer`, `Ort`, `Plz`) VALUES
 (1, 'asd', 'asd', '', 0, '', 0);
 
 -- --------------------------------------------------------
