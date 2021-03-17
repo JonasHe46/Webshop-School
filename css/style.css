@@ -189,10 +189,11 @@
   }
 
 
-  /* login */
-.login-container{
+  /* login and register */
+  .login-container{
     margin-top: 5%;
     margin-bottom: 5%;
+    width: 30%;
 }
 .login-form-1{
     padding: 5%;
@@ -243,8 +244,10 @@
     text-decoration: none;
 }
 
+.register-form-inline{
+  margin-bottom: 1em !important;
+}
 
-
-.logInBtn {
-    margin-top: .5em !important;
+.register-text-inline{
+  width: 50%;
 }
