@@ -1,3 +1,6 @@
+import { ajaxRequest } from "./ajax.js";
+
+
 $(document).ready(function(){
     $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
       if (this.hash !== "") {
@@ -31,3 +34,4 @@ $(document).ready(function(){
      element.classList.add("dNone");
     }
     
+    ajaxRequest();
