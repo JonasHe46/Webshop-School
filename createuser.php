@@ -3,14 +3,25 @@
 
     $name = $_POST["name"];
     $pass = $_POST["password"];
+    $passrep = $_POST["passwordrep"];
+    $street = $_POST["street"];
+    $number = $_POST["number"];
+    $plz = $_POST["plz"];
+    $city = $_POST["city"];
+    
 
-    $result = $mysqli->query("INSERT INTO benutzer (U_Username, U_Password) VALUES ('$name','$pass')");
-    if($result){
-        echo "User wurde angelegt";
+    if($pass == $passrep){
+        $result = $mysqli->query("INSERT INTO benutzer (Username, Password, Strasse, Hausnummer, Ort, Plz) VALUES ('$name','$pass',$street, $number, $city, $plz)");
+        if($result){
+            echo "User created successfully.";
+        }
+        else {
+            echo "User could not be created. Please try again later -> <a href="register.html">register</a>";
+        }   
+    } else {
+        exit("The entered passwords do not match. Please try again -> <a href="register.html">register</a>");
     }
-    else {
-        echo "User wurde nicht angelegt bitte versuchen sie es erneut.";
-    }   
+    
         
 ?>
 
