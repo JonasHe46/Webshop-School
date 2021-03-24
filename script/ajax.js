@@ -10,7 +10,7 @@ function ajaxRequest() {
        
         // (B2) AJAX CALL
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', "getData.php");
+        xhr.open('POST', "/webshop/script/getData.php");
         xhr.onload = function () {
           console.log(this.response);
         };
