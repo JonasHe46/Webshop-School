@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
   array_push($arr["Artikel"]["A_Beschreibung"], $row["A_Beschreibung"]);
   array_push($arr["Artikel"]["A_Preis"], $row["A_Preis"]);
   // array_push($arr["Artikel"]["A_Bild"], $row["A_Bild"]);
-  array_push($arr["Artikel"]["A_KategorieID"], $row["A_kategorie_ID"]);
+  array_push($arr["Artikel"]["A_KategorieID"], $row["kategorie_ID"]);
   }
 
   echo(json_encode($arr));

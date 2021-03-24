@@ -36,7 +36,7 @@ $(document).ready(function(){
     
     ajaxRequest();
 
-    fetchDataAsync('http://192.168.64.2/webshop/script/getData.php');
+    fetchDataAsync('/webshop/script/getData.php');
 
 
 
