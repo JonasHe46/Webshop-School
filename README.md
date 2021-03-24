@@ -1,2 +1,2 @@
 
-Wir bauen eine Webshop!
+Wir bauen einen Webshop!

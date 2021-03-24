@@ -34,7 +34,6 @@ $(document).ready(function(){
      element.classList.add("dNone");
     }
     
-<<<<<<< HEAD
     ajaxRequest();
 
     fetchDataAsync('http://192.168.64.2/webshop/script/getData.php');
@@ -73,6 +72,3 @@ $(document).ready(function(){
 
       categorySection.appendChild(categoryHeader);
     }
-=======
-    ajaxRequest();
->>>>>>> bb412f58d57ec386b9387241721bb1d9a1cd42c3
