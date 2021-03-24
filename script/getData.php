@@ -11,18 +11,29 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } 
 
+$arr = [];
+$arr["Artikel"] = [];
+$arr["Artikel"]["A_IDS"] = [];
+$arr["Artikel"]["A_Name"] = [];
+$arr["Artikel"]["A_Beschreibung"] = [];
+$arr["Artikel"]["A_Preis"] = [];
+$arr["Artikel"]["A_Bild"] = [];
+$arr["Artikel"]["A_KategorieID"] = [];
 $sql = "SELECT * FROM artikel";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-  //   echo "id: " . $row["A_ID"]. " - Name: " . $row["A_Name"]. " " . "<br>";
-  echo $row["A_ID"];
+  array_push($arr["Artikel"]["A_IDS"], $row["A_ID"]);
+  array_push($arr["Artikel"]["A_Name"], $row["A_Name"]);
+  array_push($arr["Artikel"]["A_Beschreibung"], $row["A_Beschreibung"]);
+  array_push($arr["Artikel"]["A_Preis"], $row["A_Preis"]);
+  // array_push($arr["Artikel"]["A_Bild"], $row["A_Bild"]);
+  array_push($arr["Artikel"]["A_KategorieID"], $row["A_kategorie_ID"]);
   }
 
+  echo(json_encode($arr));
   $rows = $result->fetch_all(MYSQLI_ASSOC);
-
-  // print json_encode($rows);
   
 } else {
   echo "0 results";

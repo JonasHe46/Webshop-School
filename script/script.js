@@ -1,4 +1,4 @@
-import { ajaxRequest } from "./ajax.js";
+import { ajaxRequest, fetchDataAsync } from "./ajax.js";
 
 
 $(document).ready(function(){
@@ -36,6 +36,7 @@ $(document).ready(function(){
     
     ajaxRequest();
 
+    fetchDataAsync('http://192.168.64.2/webshop/script/getData.php');
 
 
 
