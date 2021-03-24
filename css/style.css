@@ -253,8 +253,13 @@
     margin-top: .5em !important;
 }
 
+.RegisterBtn {
+  font-weight: 600;
+}
 
-
+.ExistAccBtn {
+  font-weight: 600;
+}
 
 /* cards */
 body{margin-top:20px;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 18. Mrz 2021 um 12:44
--- Server-Version: 10.4.17-MariaDB
--- PHP-Version: 8.0.2
+-- Erstellungszeit: 24. Mrz 2021 um 10:46
+-- Server-Version: 10.4.18-MariaDB
+-- PHP-Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -60,21 +60,22 @@ INSERT INTO `artikel` (`A_ID`, `A_Name`, `A_Beschreibung`, `A_Preis`, `A_Bild`, 
 --
 
 CREATE TABLE `benutzer` (
-  `U_ID` int(11) NOT NULL,
-  `U_Username` varchar(30) COLLATE utf8_bin NOT NULL,
-  `U_Password` text COLLATE utf8_bin NOT NULL,
-  `Straße` varchar(50) COLLATE utf8_bin NOT NULL,
-  `Hausnummer` int(11) NOT NULL,
+  `ID` int(11) NOT NULL,
+  `Username` varchar(30) COLLATE utf8_bin NOT NULL,
+  `Password` text COLLATE utf8_bin NOT NULL,
+  `Strasse` varchar(50) COLLATE utf8_bin NOT NULL,
+  `Hausnummer` varchar(11) COLLATE utf8_bin NOT NULL,
   `Ort` varchar(50) COLLATE utf8_bin NOT NULL,
-  `Plz` int(11) NOT NULL
+  `Plz` varchar(5) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Daten für Tabelle `benutzer`
 --
 
-INSERT INTO `benutzer` (`U_ID`, `U_Username`, `U_Password`, `Straße`, `Hausnummer`, `Ort`, `Plz`) VALUES
-(1, 'asd', 'asd', '', 0, '', 0);
+INSERT INTO `benutzer` (`ID`, `Username`, `Password`, `Strasse`, `Hausnummer`, `Ort`, `Plz`) VALUES
+(2, 'asd', '$2y$10$/G0IooakjN24qAt04hv6hedm7D2RgzLvsWsLvWTRYEAoHy/ftL7rG', '', '', '', ''),
+(4, 'Admin', '$2y$10$P2f/nU.O/hll2f6n/WYZ/.n.h2Gv3r5OhTWh2Q1s8gY5SY0Ix6d5a', 'Musterstreet', '420', 'Mustercity', '42069');
 
 -- --------------------------------------------------------
 
@@ -141,7 +142,7 @@ ALTER TABLE `artikel`
 -- Indizes für die Tabelle `benutzer`
 --
 ALTER TABLE `benutzer`
-  ADD PRIMARY KEY (`U_ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indizes für die Tabelle `bestelldetails`
@@ -175,7 +176,7 @@ ALTER TABLE `artikel`
 -- AUTO_INCREMENT für Tabelle `benutzer`
 --
 ALTER TABLE `benutzer`
-  MODIFY `U_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `bestelldetails`
