@@ -1,3 +1,4 @@
+import { mainPage } from "./build.js";
 
 function ajaxRequest() {
 
@@ -25,7 +26,8 @@ async function fetchDataAsync(url) {
    await fetch(url)
     .then(response => response.json())
     .then(data => {
-      console.log(data["Artikel"]);
+      console.log(data);
+      mainPage(data);
     })
     .catch((error) => {
       console.error('Error:', error);
