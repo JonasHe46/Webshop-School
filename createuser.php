@@ -1,5 +1,5 @@
 <?php
-    include_once ("db.php");
+    $mysqli = new mysqli("localhost", "root","","webshop");
 
     $name = $_POST["name"];
     $pass = $_POST["password"];
@@ -11,15 +11,24 @@
     
 
     if($pass == $passrep){
-        $result = $mysqli->query("INSERT INTO benutzer (Username, Password, Strasse, Hausnummer, Ort, Plz) VALUES ('$name','$pass',$street, $number, $city, $plz)");
-        if($result){
-            echo "User created successfully.";
+        $available = $mysqli->query("SELECT ID FROM benutzer WHERE Username LIKE '$name'");
+        if($available->num_rows == 0) {
+            $hashedPass = password_hash($pass, PASSWORD_DEFAULT);
+            $insert = "INSERT INTO benutzer (Username, Password, Strasse, Hausnummer, Ort, Plz) VALUES ('$name','$hashedPass', '$street', '$number', '$city', '$plz')";
+            $query = $mysqli->query($insert);
+        
+            if($query == true){
+                echo 'User created successfully. You can <a href="login.html">Login</a> using your created account.';
+            }
+            else {
+                echo 'User could not be created. Please try again later -> <a href="register.html">register</a>';
+            }
+        } else {
+            echo 'This user already exists. Please try again using a different username -> <a href="register.html">Register</a>';
         }
-        else {
-            echo "User could not be created. Please try again later -> <a href="register.html">register</a>";
-        }   
+           
     } else {
-        exit("The entered passwords do not match. Please try again -> <a href="register.html">register</a>");
+        exit('The entered passwords do not match. Please try again -> <a href="register.html">register</a>');
     }
     
         
@@ -34,6 +43,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>asd</h1>
+
 </body>
 </html>

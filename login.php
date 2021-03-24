@@ -23,13 +23,20 @@
         if(isset($_POST["name"]) && isset($_POST["password"])){
             $user = $_POST["name"];
             $pass = $_POST["password"];
-            $request = $mysqli->query("SELECT ID FROM benutzer WHERE Username LIKE '$user' AND Password LIKE '$pass'");
-            if($request->num_rows == 1) {
-                $_SESSION["name"] = $user;
-                header("Location: index.html");
-            }else {
-                exit("Wrong username or password. Please try again -> <a href="login.html">Login</a>");
+            $request = $mysqli->query("SELECT * FROM benutzer WHERE Username LIKE '$user'");
+
+            while($row = $request->fetch_array()){
+                $passsql = $row["Password"];
+                if(password_verify($pass, $passsql)) {
+                    $_SESSION["name"] = $user;
+                    header("Location: index.php");
+                }else {
+                    exit("Wrong username or password. Please try again -> <a href='login.html'>Login</a>");
+                }    
             }
+            
+        }else {
+            echo 'Something went wrong please try again --> <a href="login.html"> Login </a>';
         }
         
     ?>
