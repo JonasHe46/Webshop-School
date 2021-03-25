@@ -38,23 +38,41 @@ if ($result->num_rows > 0) {
   array_push($arr["Artikel"]["A_Name"], $row["A_Name"]);
   array_push($arr["Artikel"]["A_Beschreibung"], $row["A_Beschreibung"]);
   array_push($arr["Artikel"]["A_Preis"], $row["A_Preis"]);
- 
-
-  array_push($arr["Kategorie"]["KategorieName"], $row["kategorie_name"]);
   array_push($arr["Artikel"]["A_KategorieID"], $row["kategorie_ID"]);
-  array_push($arr["Kategorie"]["KategorieID"], $row["kategorie_ID"]);
+
+
   }
+
+  
   
 
 
+
+  
+  
+} 
+
+else {
+  echo "0 results";
+}
+
+$resultKat = $conn->query("SELECT * FROM kategorie");
+
+if($resultKat->num_rows > 0) {
+  while($row = $resultKat->fetch_assoc()) {
+    //push into array
+    array_push($arr["Kategorie"]["KategorieName"], $row["kategorie_name"]);
+    array_push($arr["Kategorie"]["KategorieID"], $row["kategorie_ID"]);
+
+    
+  }
 
   //array in json
   echo(json_encode($arr));
   $rows = $result->fetch_all(MYSQLI_ASSOC);
-  
-} else {
-  echo "0 results";
+  $rows = $resultKat->fetch_all(MYSQLI_ASSOC);
 }
+  
 
 $conn->close();
 ?>
