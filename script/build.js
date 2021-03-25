@@ -16,13 +16,14 @@
         htmlBody.appendChild(bootdeyDiv);
 
         //call elementsß
-        addSearch(mainNavDiv)
-        addCategory(data, mainNavDiv)
+        addSearch(mainNavDiv);
+        addCategory(data, mainNavDiv);
+        addProducts(data, mainNavDiv);
 
   
       }
 
-      
+
       function addSearch(mainNavDiv) {
          //create elements
         let searchSection = document.createElement("section");
@@ -58,21 +59,26 @@
 
        // category values
        categoryHeader.innerHTML = "Categorie";
-       let categoryIDCounter = 0;
+       let categoryIDCounter = 1;
 
        //loop through data
        Object.values(data["Kategorie"]["KategorieName"]).forEach(e => {
          let categoryLi = document.createElement("li");
          let categoryA = document.createElement("a");
          let categoryI = document.createElement("i");
+         let id = "category" + categoryIDCounter
          //set Attribute
          categoryI.classList.add("fa");
          categoryI.classList.add("fa-angle-right");
-         categoryA.setAttribute("id", "category" + categoryIDCounter);
-
+         categoryA.setAttribute("id", id);
+         categoryA.setAttribute("style", "cursor: pointer");
          //value
          categoryA.innerHTML = e + " ";
 
+        //  categoryA.onclick = category;
+        categoryA.addEventListener('click', function(){
+          category(data, id);
+      });
          //append
          categoryA.appendChild(categoryI);
          categoryLi.appendChild(categoryA);
@@ -87,8 +93,42 @@
        mainNavDiv.appendChild(categorySection);
  
        //set first category selected
-       document.getElementById("category0").classList.add("active");
+       document.getElementById("category1").classList.add("active");
       }
 
 
+      function addProducts(data, mainNavDiv) {
+
+   
+         
+        // switchCategory()
+
+        Object.keys(data["Artikel"]["A_IDS"]).forEach(a_IDS => {
+          // console.log(a_IDS)
+
+          //das sind die Kategorien
+          // console.log(data["Artikel"]["A_KategorieID"][a_IDS]);
+      
+
+        })
+      }
+
+      function switchCategory() {
+        console.log("function switch category")
+      }
+
+      function category(data, id) {
+        // console.log("data: ", data, " id: ", id)
+        console.log("click")
+        Object.keys(data["Artikel"]["A_IDS"]).forEach(a_IDS => {
+          if(id.substring(8) == data["Artikel"]["A_KategorieID"][a_IDS]) {
+            // console.log("this id: ", id.substring(8))
+            // console.log("A_IDS: ", a_IDS)
+            console.log(data["Artikel"]["A_Name"][a_IDS])
+        
+          }
+        })
+
+       
+      }
       export { mainPage };
