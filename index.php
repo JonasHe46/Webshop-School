@@ -1,4 +1,6 @@
-
+<?php
+	session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +29,27 @@
 			<li><a href="#service">Service</a></li>
 			<li><a href="#about">About us</a></li>
 			<li><a href="#contact">Contact</a></li>
-			<li class="mt-3 logInBtn"> <p><a href="login.html" class="btn btn-info">
+
+			<?php
+				if(!isset($_SESSION["name"])) {
+			?>
+			<li class="mt-3 logInBtn" > <p ><a href="login.html" class="btn btn-info" id="loginBtn">
 				<span class="glyphicon glyphicon-user "></span>Login 
 			  </a></p>
 			 </li>
+
+			<?php
+				}else {
+			?>
+			<li class="mt-3 logInBtn" > <p ><a href="logout.php" class="btn btn-info" id="logoutBtn">
+				<span class="glyphicon glyphicon-user "></span>Logout 
+			  </a></p>
+			 </li>
+
+			 <?php
+				}
+			 ?>
+
 			 <li><i class="fa sC" style="font-size:24px">&#xf07a;</i>
 				<span class='badge badge-warning' id='lblCartCount'> 2 </span></li>
 		  </ul>
@@ -397,6 +416,7 @@
   <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
   <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
   <script type="module" src="/webshop/script/script.js"></script>
+  <script type="module" src="/webshop/script/ajax.js"></script>
 </body>
 </html>
 
