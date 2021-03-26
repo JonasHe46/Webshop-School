@@ -14,7 +14,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/webshop/css/style.css">
 </head>
 <body id="fT" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -123,7 +123,7 @@
 
   <!-- cards -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-  <div class="container bootdey">
+ <!--  <div class="container bootdey">
 	  <div class="col-md-3">
 		  <section class="panel">
 			  <div class="panel-body">
@@ -138,11 +138,11 @@
 				  <ul class="nav prod-cat">
 					  <li>
 						  <a class="active"><i class="fa fa-angle-right"></i> Handy's</a>
-						  <!-- <ul class="nav">
+						  <ul class="nav">
 							  <li class="active"><a href="#">- IPhone</a></li>
 							  <li><a href="#">- Samsung</a></li>
 							  <li><a href="#">- OnePlus</a></li>
-						  </ul> -->
+						  </ul> 
 					  </li>
 					  <li>
 						<a ><i class="fa fa-angle-right"></i> Tablets</a>
@@ -156,7 +156,7 @@
 				
 				  </ul>
 			  </div>
-		  </section>
+		  </section> -->
 		  <!-- price range  -->
 		  <!-- <section class="panel">
 			  <header class="panel-heading">
@@ -211,7 +211,9 @@
 				  </form>
 			  </div>
 		  </section> -->
-		  <section class="panel">
+
+		<!-- Best Seller -->
+		  <!-- <section class="panel">
 			  <header class="panel-heading">
 				  Best Seller
 			  </header>
@@ -250,7 +252,7 @@
 	  </div>
 	  <div class="col-md-9">
 		  <section class="panel">
-			  <!-- <div class="panel-body">
+			  <div class="panel-body">
 				  <div class="pull-right">
 					  <ul class="pagination pagination-sm pro-page-list">
 						  <li><a href="#">1</a></li>
@@ -260,7 +262,7 @@
 					  </ul>
 				  </div>
 			  </div> -->
-		  </section>
+		 <!--  </section>
   
 		  <div class="row product-list">
 			  <div class="col-md-4">
@@ -379,7 +381,7 @@
 			  </div>
 		  </div>
 	  </div>
-  </div>
+  </div> -->
 
   <!-- login -->
 <!-- <div class="container login-container">

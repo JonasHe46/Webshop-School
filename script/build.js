@@ -18,7 +18,7 @@
         //call elementsß
         addSearch(mainNavDiv);
         addCategory(data, mainNavDiv, bootdeyDiv);
-        addProducts(data, mainNavDiv);
+        // addProducts(data, mainNavDiv);
 
   
       }
@@ -66,18 +66,19 @@
          let categoryLi = document.createElement("li");
          let categoryA = document.createElement("a");
          let categoryI = document.createElement("i");
-         let id = "category" + categoryIDCounter
+         let id = "category" + categoryIDCounter;
          //set Attribute
          categoryI.classList.add("fa");
          categoryI.classList.add("fa-angle-right");
          categoryA.setAttribute("id", id);
+         categoryA.classList.add("categorieSelect")
          categoryA.setAttribute("style", "cursor: pointer");
          //value
          categoryA.innerHTML = e + " ";
 
         //  categoryA.onclick = category;
         categoryA.addEventListener('click', function(){
-          category(data, id, bootdeyDiv);
+          addProducts(data, id, bootdeyDiv);
       });
          //append
          categoryA.appendChild(categoryI);
@@ -94,30 +95,17 @@
  
        //set first category selected
        document.getElementById("category1").classList.add("active");
+       addProducts(data, "category1", bootdeyDiv);
       }
 
 
-      function addProducts(data, mainNavDiv) {
+      function addProducts(data, id, bootdeyDiv) {
+        if(document.getElementById("cartMainDiv")) {
+          switchCategory(id);
+        }
+        wipeCartDiv();
 
-   
-         
-        // switchCategory()
 
-        Object.keys(data["Artikel"]["A_IDS"]).forEach(a_IDS => {
-          // console.log(a_IDS)
-
-          //das sind die Kategorien
-          // console.log(data["Artikel"]["A_KategorieID"][a_IDS]);
-      
-
-        })
-      }
-
-      function switchCategory() {
-        console.log("function switch category")
-      }
-
-      function category(data, id, bootdeyDiv) {
         let cartMainDiv = document.createElement("div");
         let cartPanelSelection = document.createElement("section");
 
@@ -125,61 +113,91 @@
 
         cartPanelSelection.classList.add("panel");
         cartMainDiv.classList.add("col-md-9");
+        cartMainDiv.setAttribute("id", "cartMainDiv");
 
         cartDiv.classList.add("row");
         cartDiv.classList.add("product-list");
 
-
+       
         // console.log("data: ", data, " id: ", id)
-        console.log("click")
-        Object.keys(data["Artikel"]["A_IDS"]).forEach(a_IDS => {
-          if(id.substring(8) == data["Artikel"]["A_KategorieID"][a_IDS]) {
-            // console.log("this id: ", id.substring(8))
-            // console.log("A_IDS: ", a_IDS)
-            // console.log(data["Artikel"]["A_Name"][a_IDS])
-            let rowDiv = document.createElement("div");
-            rowDiv.classList.add("col-md-4");
-            let productName = data["Artikel"]["A_Name"][a_IDS]
-            let section = document.createElement("section");
-            section.classList.add("panel");
-            let div = document.createElement("div");
-            div.classList.add("pro-img-box");
-            let img = document.createElement("img");
-            img.setAttribute("alt", productName);
-            img.setAttribute("src", "img/" + productName + ".png")
-            let a = document.createElement("a");
-            a.classList.add("adtocart");
-            a.setAttribute("href", "#");
-             let i = document.createElement("i");
-             i.classList.add("fa");
-             i.classList.add("fa-shopping-cart");
-             let div2 = document.createElement("div");
-             div2.classList.add("panel-body");
-             div2.classList.add("text-center");
-             let h4 = document.createElement("h4");
-             let a2 = document.createElement("a");
-             a2.classList.add("pro-title");
-             a2.innerHTML = productName;
-             let p= document.createElement("a");
-             p.classList.add("price");
-             p.innerHTML = "$" + data["Artikel"]["A_Preis"][a_IDS];
+      // console.log("click " + id)
+      Object.keys(data["Artikel"]["A_IDS"]).forEach(a_IDS => {
+        if(id.substring(8) == data["Artikel"]["A_KategorieID"][a_IDS]) {
+          // console.log("this id: ", id.substring(8))
+          // console.log("A_IDS: ", a_IDS)
+          // console.log(data["Artikel"]["A_Name"][a_IDS])
+          let rowDiv = document.createElement("div");
+          rowDiv.classList.add("col-md-4");
+          let productName = data["Artikel"]["A_Name"][a_IDS]
+          let section = document.createElement("section");
+          section.classList.add("panel");
+          let div = document.createElement("div");
+          div.classList.add("pro-img-box");
+          let img = document.createElement("img");
+          img.setAttribute("alt", productName);
+          img.setAttribute("src", "img/" + productName + ".png")
+          img.classList.add("productImg");
+          let a = document.createElement("a");
+          a.classList.add("adtocart");
+          a.setAttribute("href", "#");
+           let i = document.createElement("i");
+           i.classList.add("fa");
+           i.classList.add("fa-shopping-cart");
+           let div2 = document.createElement("div");
+           div2.classList.add("panel-body");
+           div2.classList.add("text-center");
+           let h4 = document.createElement("h4");
+           let a2 = document.createElement("a");
+           a2.classList.add("pro-title");
+           a2.innerHTML = productName;
+           let p= document.createElement("a");
+           p.classList.add("price");
+           p.innerHTML = "$" + data["Artikel"]["A_Preis"][a_IDS];
 
-             div.appendChild(img);
-             a.appendChild(i);
-             div.appendChild(a);
-             section.appendChild(div);
-             h4.appendChild(a2);
-             div2.appendChild(h4);
-             div2.appendChild(p);
-             section.appendChild(div2);
-             rowDiv.appendChild(section);
-             cartDiv.appendChild(rowDiv);
-          }
-        })
+           div.appendChild(img);
+           a.appendChild(i);
+           div.appendChild(a);
+           section.appendChild(div);
+           h4.appendChild(a2);
+           div2.appendChild(h4);
+           div2.appendChild(p);
+           section.appendChild(div2);
+           rowDiv.appendChild(section);
+           cartDiv.appendChild(rowDiv);
+        }
+      })
 
 
-        cartMainDiv.appendChild(cartPanelSelection);
-        cartMainDiv.appendChild(cartDiv);
+      cartMainDiv.appendChild(cartPanelSelection);
+      cartMainDiv.appendChild(cartDiv);
+  
+  
         bootdeyDiv.appendChild(cartMainDiv);
       }
+
+      
+      function switchCategory(id) {
+        document.querySelectorAll(".categorieSelect").forEach(function (categorie) {
+          if (categorie.getAttribute("class").indexOf('active') > -1) {
+            document.getElementById(categorie.getAttribute("id")).classList.remove("active");
+          } 
+        });
+        document.getElementById(id).classList.add("active");
+      }
+
+      function wipeCartDiv() {
+        if(document.getElementById("cartMainDiv")) {
+          document.getElementById("cartMainDiv").remove();
+        }
+      }
+      Element.prototype.remove = function() {
+        this.parentElement.removeChild(this);
+    }
+    NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+        for(var i = this.length - 1; i >= 0; i--) {
+            if(this[i] && this[i].parentElement) {
+                this[i].parentElement.removeChild(this[i]);
+            }
+        }
+    }
       export { mainPage };

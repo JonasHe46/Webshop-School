@@ -1,2 +1,0 @@
-
-Wir bauen einen Webshop!

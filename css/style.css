@@ -463,3 +463,9 @@ body{margin-top:20px;
   color: white;
   cursor: pointer;
 }
+
+.productImg {
+    width:  100px;
+    height: 200px;
+    object-fit: scale-down;
+}
