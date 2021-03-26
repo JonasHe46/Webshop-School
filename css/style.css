@@ -360,6 +360,7 @@ body{margin-top:20px;
       display: inline-block;
       margin-top: 20px;
       font-size: 16px;
+      min-height: 5em;
   }
   
   .product-list .price {
@@ -427,6 +428,7 @@ body{margin-top:20px;
 
   .bootdey {
     margin-top: 2em;
+    min-height: 35em;
   }
 
 
@@ -468,4 +470,23 @@ body{margin-top:20px;
     width:  100px;
     height: 200px;
     object-fit: scale-down;
+}
+
+.freshTekFooter {
+  background-color: var(--primary);
+  color: white;
+  font-family: Montserrat, sans-serif;
+  font-size: large;
+}
+
+.carousel .item {
+  height: 300px;
+}
+
+
+.carouselimg {
+
+  width: 100% !important;
+  /* height: 300px;
+  object-fit: scale-down; */
 }

@@ -69,14 +69,14 @@
 
   <div class="jumbotron text-center">
     <h1>Fresh Tek</h1> 
-    <p>Da wo Ihr eure Freshe Tek shoppt!</p> 
+    <p> teck for your needs!</p> 
   </div>
 
 
 <!-- carousel -->
 <div class="container">
 	<h2>Powerful. Wonderful. Brilliant </h2>  
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<div id="myCarousel" class="carousel slide w-50" data-ride="carousel">
 	  <!-- Indicators -->
 	  <ol class="carousel-indicators">
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -89,23 +89,23 @@
 	  <!-- Wrapper for slides -->
 	  <div class="carousel-inner">
 		<div class="item active">
-		  <img src="img/iphone grey.jpg" alt="Iphone" style="width:100%;">
+		  <img class="carouselimg" src="img/iphone grey.jpg" alt="Iphone" >
 		</div>
   
 		<div class="item">
-		  <img src="img/ipad.jpg" alt="IPad" style="width:100%;">
+		  <img class="carouselimg" src="img/ipad.jpg" alt="IPad">
 		</div>
 
 		<div class="item">
-			<img src="img/AppleWatch.png" alt="AppleWatch" style="width:100%;">
+			<img class="carouselimg" src="img/AppleWatch.png" alt="AppleWatch" >
 		  </div>
 
 		  <div class="item">
-			<img src="img/Huawei.jpg" alt="Huawei" style="width:100%;">
+			<img class="carouselimg" src="img/Huawei.jpg" alt="Huawei" >
 		  </div>
 	  
 		<div class="item">
-		  <img src="img/macbook-pro-13-2020.jpg" alt="MacBook" style="width:100%;">
+		  <img class="carouselimg" src="img/macbook-pro-13-2020.jpg" alt="MacBook">
 		</div>
 	  </div>
   
@@ -408,12 +408,12 @@
 
   
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
+  <!-- <footer class="py-5 bg-dark">
     <div class="container">
       <p class="m-0 text-center text-white">FreshTek</p>
-    </div>
+    </div> -->
     <!-- /.container -->
-  </footer>
+  <!-- </footer> -->
   <!-- Bootstrap core JavaScript -->
   <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
   <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->

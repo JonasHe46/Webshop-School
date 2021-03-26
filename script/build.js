@@ -20,9 +20,24 @@
         addCategory(data, mainNavDiv, bootdeyDiv);
         // addProducts(data, mainNavDiv);
 
-  
+        buildFooter();
       }
 
+      function buildFooter() {
+        let footer = document.createElement("footer");
+        footer.classList.add("freshTekFooter");
+        let div = document.createElement("div");
+        div.classList.add("container");
+        let p = document.createElement("p");
+        p.classList.add("m-0");
+        p.classList.add("text-center");
+        p.classList.add("text-white");
+        p.innerHTML = "Fresh Tek";
+
+        div.appendChild(p);
+        footer.appendChild(div);
+        document.getElementById("fT").appendChild(footer);
+      }  
 
       function addSearch(mainNavDiv) {
          //create elements
@@ -150,6 +165,7 @@
            let a2 = document.createElement("a");
            a2.classList.add("pro-title");
            a2.innerHTML = productName;
+           a2.setAttribute("style", "cursor:pointer")
            let p= document.createElement("a");
            p.classList.add("price");
            p.innerHTML = "$" + data["Artikel"]["A_Preis"][a_IDS];
@@ -190,6 +206,7 @@
           document.getElementById("cartMainDiv").remove();
         }
       }
+
       Element.prototype.remove = function() {
         this.parentElement.removeChild(this);
     }
@@ -199,5 +216,8 @@
                 this[i].parentElement.removeChild(this[i]);
             }
         }
+
+
+  
     }
       export { mainPage };
