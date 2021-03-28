@@ -239,6 +239,7 @@
         img.setAttribute("src", "img/" + productName + ".png")
         img.classList.add("img-fluid");
         img.classList.add("z-depth-1");
+        img.classList.add("maxWidth");
         //append img
         figure.appendChild(img);
         productGalleryDiv.appendChild(figure);

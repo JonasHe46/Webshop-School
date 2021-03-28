@@ -490,3 +490,7 @@ body{margin-top:20px;
   /* height: 300px;
   object-fit: scale-down; */
 }
+
+.maxWidth {
+  max-width: 60% !important;
+}
