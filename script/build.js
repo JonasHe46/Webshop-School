@@ -1,5 +1,5 @@
 
-    function mainPage(d) {
+    function mainPage(d, catID) {
        //create elements
         let data = d;
         let htmlBody = document.getElementById("fT");
@@ -18,7 +18,7 @@
 
         //call elementsß
         addSearch(mainNavDiv);
-        addCategory(data, mainNavDiv, bootdeyDiv);
+        addCategory(data, mainNavDiv, bootdeyDiv, catID);
         // addProducts(data, mainNavDiv);
 
         buildFooter();
@@ -27,6 +27,7 @@
       function buildFooter() {
         let footer = document.createElement("footer");
         footer.classList.add("freshTekFooter");
+        footer.setAttribute("id", "footer");
         let div = document.createElement("div");
         div.classList.add("container");
         let p = document.createElement("p");
@@ -59,7 +60,7 @@
         mainNavDiv.appendChild(searchSection);
       }
 
-      function addCategory(data, mainNavDiv, bootdeyDiv) {
+      function addCategory(data, mainNavDiv, bootdeyDiv, catID) {
        //create elements
        let categorySection = document.createElement("section");
        let categoryHeader = document.createElement("header");
@@ -110,8 +111,14 @@
        mainNavDiv.appendChild(categorySection);
  
        //set first category selected
-       document.getElementById("category1").classList.add("active");
-       addProducts(data, "category1", bootdeyDiv);
+       if(catID){
+         let cat = "category" + catID;
+        document.getElementById(cat).classList.add("active");
+        addProducts(data, cat, bootdeyDiv);
+       }else {
+        document.getElementById("category1").classList.add("active");
+        addProducts(data, "category1", bootdeyDiv);
+       }
       }
 
 
@@ -207,7 +214,7 @@
         document.getElementById(id).classList.add("active");
       }
 
-     function showProduct(data, a_IDS, cartDiv, productName) {
+     function showProduct(data, a_IDS, bootdeyDiv, productName) {
         wipeBootdeyDiv();
         console.log(data["Artikel"]["A_Name"][a_IDS])
         let productSection = document.createElement("section");
@@ -295,18 +302,25 @@
         
         productMainRowDiv.appendChild(textDiv);
         productSection.appendChild(productMainRowDiv);
-        cartDiv.appendChild(productSection);
+        bootdeyDiv.appendChild(productSection);
+
+        arrowLeftBtn.addEventListener('click', function(){
+          goBack(data, a_IDS, bootdeyDiv)
+      });
       }
 
 
-      function goBack() {
-        
+      function goBack(data, a_IDS, bootdeyDiv) {
+          document.getElementById("footer").remove();
+          bootdeyDiv.remove();
+          mainPage(data, data["Artikel"]["A_KategorieID"][a_IDS]);
       }
 
 
       function wipeCartDiv() {
         if(document.getElementById("cartMainDiv")) {
           document.getElementById("cartMainDiv").remove();
+          
         }
       }
 
