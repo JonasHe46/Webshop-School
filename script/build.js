@@ -1,4 +1,10 @@
-
+    let shoppingCart = {};
+    shoppingCart["Count"] = 1;
+    shoppingCart["Product"] = {};
+    shoppingCart["Product"]["Name"] = [];
+    shoppingCart["Product"]["Price"] = [];
+    shoppingCart["Price"] = [];
+    
     function mainPage(d, catID) {
        //create elements
         let data = d;
@@ -216,7 +222,6 @@
 
      function showProduct(data, a_IDS, bootdeyDiv, productName) {
         wipeBootdeyDiv();
-        console.log(data["Artikel"]["A_Name"][a_IDS])
         let productSection = document.createElement("section");
         productSection.classList.add("mb-5");
         let productMainRowDiv = document.createElement("div");
@@ -306,14 +311,226 @@
         bootdeyDiv.appendChild(productSection);
 
         arrowLeftBtn.addEventListener('click', function(){
-          goBack(data, a_IDS, bootdeyDiv)
-      });
+          goBack(data, bootdeyDiv, a_IDS)
+        });
+
+        button.addEventListener('click', function(){
+          addToShoppingCart(data, a_IDS, bootdeyDiv);
+        });
       }
 
+      function addToShoppingCart(data, a_IDS, bootdeyDiv) {
+        if(document.getElementById("cartCount")) {
+          shoppingCart["Count"]++;
+          console.log("Test: ",shoppingCart["Price"])
+          shoppingCart["Price"].push(data["Artikel"]["A_Preis"][a_IDS]);
+          document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
+        }else {
+          let shoppingCartLi = document.getElementById("shoppingCartLi");
+          //  <span class='badge badge-warning' id='lblCartCount'> 2 </span><
+          let number = document.createElement("span");
+          number.classList.add("badge");
+          number.classList.add("badge-warning");
+          number.setAttribute("id", "cartCount");
+          number.classList.add
+          number.innerHTML = shoppingCart["Count"];
+          shoppingCartLi.appendChild(number);
+          document.getElementById("shoppingCart").classList.remove("sC3");
+          document.getElementById("shoppingCart").classList.add("sC2");
+          shoppingCart["Price"].push(data["Artikel"]["A_Preis"][a_IDS]);
 
-      function goBack(data, a_IDS, bootdeyDiv) {
+          document.getElementById("shoppingCart").addEventListener('click', function(){
+            shoppingCartView(bootdeyDiv, data);
+          });
+        }
+        shoppingCart["Product"]["Name"].push(data["Artikel"]["A_Name"][a_IDS]);
+        shoppingCart["Product"]["Price"].push(data["Artikel"]["A_Preis"][a_IDS]);
+        
+      }
+
+      function shoppingCartView(bootdeyDiv, data) {
+        wipeBootdeyDiv();
+        let mainCardDiv = document.createElement("div");
+        mainCardDiv.classList.add("card");
+        let rowDiv = document.createElement("div");
+        rowDiv.classList.add("row");
+        let colDiv = document.createElement("div");
+        colDiv.classList.add("col-md-8");
+        colDiv.classList.add("cart");
+        let titleDiv = document.createElement("div");
+        let titleColDiv = document.createElement("div");
+        titleColDiv.classList.add("col")
+        let titleRowDiv = document.createElement("div");
+        titleRowDiv.classList.add("row");
+        let titleh4 = document.createElement("h4");
+        let title = document.createElement("b");
+        title.innerHTML = "Shopping Cart";
+        let generalCountDiv = document.createElement("div");
+        generalCountDiv.classList.add("col");
+        generalCountDiv.classList.add("align-self-center");
+        generalCountDiv.classList.add("text-right");
+        generalCountDiv.classList.add("text-muted");
+        generalCountDiv.innerHTML = shoppingCart["Count"] + " Items"
+
+        titleh4.appendChild(title);
+        titleColDiv.appendChild(titleh4);
+        titleRowDiv.appendChild(titleColDiv);
+        titleRowDiv.appendChild(generalCountDiv);
+
+        let backToShop = document.createElement("div");
+        backToShop.classList.add("back-to-shop");
+        let backToShopBtn = document.createElement("button");
+        let backToShopI = document.createElement("span");
+        backToShopI.classList.add("glyphicon");
+        backToShopI.classList.add("glyphicon-arrow-left");
+
+        backToShopBtn.appendChild(backToShopI);
+        let backToShopSpan = document.createElement("span");
+        backToShopSpan.classList.add("text-muted");
+        backToShopSpan.innerHTML = " Back to shop";
+        backToShop.appendChild(backToShopBtn);
+        backToShop.appendChild(backToShopSpan);
+
+ 
+
+        colDiv.appendChild(backToShop);
+        colDiv.appendChild(titleRowDiv);
+        
+        titleDiv.appendChild(colDiv);
+        rowDiv.appendChild(titleDiv);
+       
+        // console.log(shoppingCart["Product"]["Name"])
+        Object.keys(shoppingCart["Product"]["Name"]).forEach(e => {
+          // console.log("e: ", shoppingCart["Product"]["Name"][e]);
+          let ProductRowDiv = document.createElement("div");
+          ProductRowDiv.classList.add("row");
+          let rowMainAlignDiv = document.createElement("div");
+          rowMainAlignDiv.classList.add("row");
+          rowMainAlignDiv.classList.add("main");
+          rowMainAlignDiv.classList.add("align-items-center");
+          let imgDiv = document.createElement("div");
+          imgDiv.classList.add("col-2");
+          let img = document.createElement("img");
+          img.setAttribute("alt", shoppingCart["Product"]["Name"][e]);
+          img.setAttribute("src", "img/" + shoppingCart["Product"]["Name"][e] + ".png");
+          img.classList.add("img-fluid");
+          // img.classList.add("z-depth-1");
+          img.classList.add("maxWidth");
+          let titleDiv = document.createElement("div");
+          titleDiv.classList.add("col");
+          let title = document.createElement("div");
+          title.classList.add("row");
+          title.innerHTML = shoppingCart["Product"]["Name"][e];
+          let priceDiv = document.createElement("div");
+          priceDiv.classList.add("col");
+          priceDiv.innerHTML = "$" + shoppingCart["Product"]["Price"][e];
+          
+          // eventuell delete
+          // let priceSpan = document.createElement("span");
+        
+        
+          imgDiv.appendChild(img);
+          titleDiv.appendChild(title);
+          rowMainAlignDiv.appendChild(imgDiv);
+          rowMainAlignDiv.appendChild(titleDiv);
+          rowMainAlignDiv.appendChild(priceDiv);
+          ProductRowDiv.appendChild(rowMainAlignDiv);
+          colDiv.appendChild(ProductRowDiv);
+        })
+
+        let summaryDiv = document.createElement("div");
+        summaryDiv.classList.add("col-md-4");
+        summaryDiv.classList.add("summary");
+        let summaryTitleDiv = document.createElement("div");
+        let summaryTitleH5 = document.createElement("h1");
+        let summaryTitleBr = document.createElement("h1");
+        summaryTitleBr.innerHTML = "Summary";
+        let summaryHr = document.createElement("hr");
+        let summaryPriceRowDiv = document.createElement("div");
+        summaryPriceRowDiv.classList.add("row");
+        let summaryItemDiv = document.createElement("div");
+        summaryItemDiv.classList.add("col");
+        summaryItemDiv.setAttribute("style", "padding-left:0");
+        summaryItemDiv.innerHTML = "ITEMS " + shoppingCart["Count"];
+        let summaryPriceDiv = document.createElement("div");
+        summaryPriceDiv.classList.add("col");
+        summaryPriceDiv.classList.add("text-right");
+        summaryPriceDiv.innerHTML = "$" + "$" + totalPriceFn;
+        let shippingForm = document.createElement("form");
+        let shippingP = document.createElement("p");
+        shippingP.innerHTML = "SHIPPING";
+        let shippingSelect = document.createElement("select");
+        let selectOption = document.createElement("option");
+        selectOption.classList.add("text-muted");
+        selectOption.innerHTML = "Standard-Delivery $5.00";
+
+        let checkoutDiv = document.createElement("div");
+        checkoutDiv.classList.add("row");
+        checkoutDiv.setAttribute("style", "border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;");
+        let totalPriceDiv = document.createElement("div");
+        totalPriceDiv.classList.add("col");
+        totalPriceDiv.innerHTML = "TOTAL PRICE";
+        let totaPrice = document.createElement("div");
+        totaPrice.classList.add("col");
+        totalPriceDiv.classList.add("text-left");
+        console.log(shoppingCart["Price"])
+        totaPrice.innerHTML = "$" + totalPriceFn;
+        let checkoutBtn = document.createElement("button");
+        checkoutBtn.classList.add("btnCart");
+        checkoutBtn.innerHTML = "CHECKOUT";
+      
+
+
+        // shippingSelect.appendChild(selectOption);
+        // shippingForm.appendChild(shippingP);
+        // shippingForm.appendChild(shippingSelect);
+        // summaryDiv.appendChild(shippingForm);
+
+        summaryTitleH5.appendChild(summaryTitleBr);
+        summaryTitleDiv.appendChild(summaryTitleH5);
+        summaryDiv.appendChild(summaryTitleDiv);
+        summaryDiv.appendChild(summaryHr);
+   
+        shippingForm.appendChild(shippingP);
+        shippingSelect.appendChild(selectOption);
+        shippingForm.appendChild(shippingSelect)
+        summaryDiv.appendChild(shippingForm);
+       
+        checkoutDiv.appendChild(totalPriceDiv);
+        checkoutDiv.appendChild(totaPrice);
+        summaryDiv.appendChild(checkoutDiv);
+        
+        
+        summaryPriceRowDiv.appendChild(summaryItemDiv);
+        summaryPriceRowDiv.appendChild(summaryPriceDiv);
+        summaryDiv.appendChild(summaryPriceRowDiv);
+        summaryDiv.appendChild(checkoutBtn);
+        rowDiv.appendChild(summaryDiv);
+        mainCardDiv.appendChild(rowDiv);
+        
+        document.getElementById("bootdeyDiv").appendChild(mainCardDiv);
+
+        backToShopBtn.addEventListener('click', function(){
+          goBack(data, bootdeyDiv);
+          // console.log( this.parentElement)
+     
+          // bootdeyDiv.remove();
+          // document.getElementById("footer").remove();
+         
+          // mainPage(data);
+        });
+      }
+
+      var totalPriceFn = shoppingCart["Price"].reduce(function(a, b){
+        return a + b;
+    }, 0);
+    
+    
+      function goBack(data, bootdeyDiv, a_IDS) {
           document.getElementById("footer").remove();
-          bootdeyDiv.remove();
+  
+          document.getElementById("bootdeyDiv").remove();
+          // console.log(this.parentElement)
           mainPage(data, data["Artikel"]["A_KategorieID"][a_IDS]);
       }
 
@@ -331,17 +548,16 @@
         }
       }
 
-      Element.prototype.remove = function() {
-        this.parentElement.removeChild(this);
-    }
-    NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-        for(var i = this.length - 1; i >= 0; i--) {
-            if(this[i] && this[i].parentElement) {
-                this[i].parentElement.removeChild(this[i]);
-            }
-        }
+      // Element.prototype.remove = function() {
+      //   this.parentElement.removeChild(this);
+    // }
+    // NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    //     for(var i = this.length - 1; i >= 0; i--) {
+    //         if(this[i] && this[i].parentElement) {
+    //             this[i].parentElement.removeChild(this[i]);
+    //         }
+    //     }
+    // }
 
 
-  
-    }
       export { mainPage };
