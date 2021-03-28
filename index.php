@@ -17,6 +17,45 @@
   <link rel="stylesheet" href="/webshop/css/style.css">
 </head>
 <body id="fT" data-spy="scroll" data-target=".navbar" data-offset="60">
+<!--Section: Block Content-->
+<!-- <section class="mb-5">
+
+  <div class="row">
+    <div class="col-md-6 mb-4 mb-md-0">
+
+      <div id="mdb-lightbox-ui">
+
+      <div class="mdb-lightbox"></div>
+
+        <div class="row product-gallery mx-1">
+
+        
+            <figure class="view overlay rounded z-depth-1 main-img col-12">
+           
+                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
+                  class="img-fluid z-depth-1 w-50"></img>
+              
+            </figure>
+		</div>
+        
+
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <h3 class="mb-2  text-uppercase extra-large font-weight-bold">IPhone</h3>
+
+      <p><span class="mr-1"><strong>$12.99</strong></span></p>
+      <p class="pt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
+        error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
+        officia quis dolore quos sapiente tempore alias.</p>
+      <hr>
+ 
+      <button type="button" class="btn btn-primary btn-md mr-1 mb-2">Add to cart</button>
+
+	</div>
+
+</section> -->
 
   <nav class="navbar navbar-default navbar-fixed-top">
   

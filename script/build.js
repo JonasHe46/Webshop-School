@@ -9,6 +9,7 @@
         //set attributes
         bootdeyDiv.classList.add("container");    
         bootdeyDiv.classList.add("bootdey"); 
+        bootdeyDiv.setAttribute("id", "bootdeyDiv")
         mainNavDiv.classList.add("col-md-3");
 
         //append
@@ -152,12 +153,12 @@
           img.setAttribute("alt", productName);
           img.setAttribute("src", "img/" + productName + ".png")
           img.classList.add("productImg");
-          let a = document.createElement("a");
-          a.classList.add("adtocart");
-          a.setAttribute("href", "#");
-           let i = document.createElement("i");
-           i.classList.add("fa");
-           i.classList.add("fa-shopping-cart");
+          // let a = document.createElement("a");
+          // a.classList.add("adtocart");
+          // a.setAttribute("href", "#");
+          //  let i = document.createElement("i");
+          //  i.classList.add("fa");
+          //  i.classList.add("fa-shopping-cart");
            let div2 = document.createElement("div");
            div2.classList.add("panel-body");
            div2.classList.add("text-center");
@@ -171,8 +172,8 @@
            p.innerHTML = "$" + data["Artikel"]["A_Preis"][a_IDS];
 
            div.appendChild(img);
-           a.appendChild(i);
-           div.appendChild(a);
+          //  a.appendChild(i);
+          //  div.appendChild(a);
            section.appendChild(div);
            h4.appendChild(a2);
            div2.appendChild(h4);
@@ -180,6 +181,11 @@
            section.appendChild(div2);
            rowDiv.appendChild(section);
            cartDiv.appendChild(rowDiv);
+
+            //on Product click
+           a2.addEventListener('click', function(){
+            showProduct(data, a_IDS, bootdeyDiv, productName);
+        });
         }
       })
 
@@ -201,9 +207,112 @@
         document.getElementById(id).classList.add("active");
       }
 
+     function showProduct(data, a_IDS, cartDiv, productName) {
+        wipeBootdeyDiv();
+        console.log(data["Artikel"]["A_Name"][a_IDS])
+        let productSection = document.createElement("section");
+        productSection.classList.add("mb-5");
+        let productMainRowDiv = document.createElement("div");
+        productMainRowDiv.classList.add("row");
+        let productColDiv = document.createElement("div");
+        productColDiv.classList.add("col-md-6");
+        productColDiv.classList.add("mb-4");
+        productColDiv.classList.add("mb-md-0");
+        let lightboxDivUi = document.createElement("div");
+        lightboxDivUi.setAttribute("id", "mdb-lightbox-ui");
+        let lightboxDiv = document.createElement("div");
+        lightboxDiv.classList.add("mdb-lightbox");
+        let productGalleryDiv = document.createElement("div");
+        productGalleryDiv.classList.add("row");
+        productGalleryDiv.classList.add("product-gallery");
+        productGalleryDiv.classList.add("mx-1");
+        let figure = document.createElement("figure");
+        let img = document.createElement("img");
+        img.setAttribute("alt", productName);
+        img.setAttribute("src", "img/" + productName + ".png")
+        img.classList.add("img-fluid");
+        img.classList.add("z-depth-1");
+        //append img
+        figure.appendChild(img);
+        productGalleryDiv.appendChild(figure);
+        lightboxDivUi.appendChild(productGalleryDiv);
+        lightboxDivUi.appendChild(lightboxDiv);
+        productColDiv.appendChild(lightboxDivUi);
+        productMainRowDiv.appendChild(productColDiv);
+        
+
+        let textDiv = document.createElement("div");
+        textDiv.classList.add("col-md-6");
+        let title = document.createElement("h3");
+        title.classList.add("mb-2");
+        title.classList.add("text-uppercase");
+        title.classList.add("extra-large");
+        title.classList.add("font-weight-bold"); 
+        title.classList.add("cart-title"); 
+        title.innerHTML = productName;
+        let priceP = document.createElement("p");
+        let priceSpan = document.createElement("span");
+        priceSpan.classList.add("mr-1");
+        let PriceStrong = document.createElement("strong");
+        PriceStrong.innerHTML = "$" + data["Artikel"]["A_Preis"][a_IDS];
+        let descriptionP = document.createElement("p");
+        descriptionP.classList.add("pt-1");
+        descriptionP.innerHTML = data["Artikel"]["A_Beschreibung"][a_IDS];
+        let hr = document.createElement("hr");
+        let button = document.createElement("button");
+        
+        button.setAttribute("type", "button");
+        button.classList.add("btn");
+        button.classList.add("btn-primary");
+        button.classList.add("btn-md");
+        button.classList.add("mr-1");
+        button.classList.add("mb-2");
+        button.innerHTML = "Add to cart";
+        let arrowLeftBtn = document.createElement("button");
+        let arrowLeftI = document.createElement("span");
+        arrowLeftI.classList.add("glyphicon");
+        arrowLeftI.classList.add("glyphicon-arrow-left");
+        // arrowLeftI.classList.add("bi-lg");
+        
+     
+    
+      //   <div class="d-flex justify-content-between align-items-center mb-3">
+      //   <h5 class="card-title mb-0">Card title</h5>
+      //   <button type="button" class="btn btn-success">Primary</button>
+      // </div>
+
+
+
+        arrowLeftBtn.appendChild(arrowLeftI);
+        textDiv.appendChild(arrowLeftBtn);
+        textDiv.appendChild(title)
+        textDiv.appendChild(priceP);
+        priceP.appendChild(priceSpan);
+        priceSpan.appendChild(PriceStrong);
+        textDiv.appendChild(descriptionP);
+        textDiv.appendChild(hr);
+        textDiv.appendChild(button);
+        
+        productMainRowDiv.appendChild(textDiv);
+        productSection.appendChild(productMainRowDiv);
+        cartDiv.appendChild(productSection);
+      }
+
+
+      function goBack() {
+        
+      }
+
+
       function wipeCartDiv() {
         if(document.getElementById("cartMainDiv")) {
           document.getElementById("cartMainDiv").remove();
+        }
+      }
+
+      function wipeBootdeyDiv() {
+        if(document.getElementById("bootdeyDiv")) {
+          document.getElementById("bootdeyDiv").innerHTML = "";
         }
       }
 
