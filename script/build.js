@@ -323,7 +323,7 @@
         if(document.getElementById("cartCount")) {
           shoppingCart["Count"]++;
           console.log("Test: ",shoppingCart["Price"])
-          shoppingCart["Price"].push(data["Artikel"]["A_Preis"][a_IDS]);
+          shoppingCart["Price"].push(parseFloat(data["Artikel"]["A_Preis"][a_IDS]));
           document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
         }else {
           let shoppingCartLi = document.getElementById("shoppingCartLi");
@@ -337,7 +337,7 @@
           shoppingCartLi.appendChild(number);
           document.getElementById("shoppingCart").classList.remove("sC3");
           document.getElementById("shoppingCart").classList.add("sC2");
-          shoppingCart["Price"].push(data["Artikel"]["A_Preis"][a_IDS]);
+          shoppingCart["Price"].push(parseFloat(data["Artikel"]["A_Preis"][a_IDS]));
 
           document.getElementById("shoppingCart").addEventListener('click', function(){
             shoppingCartView(bootdeyDiv, data);
@@ -354,6 +354,7 @@
         mainCardDiv.classList.add("card");
         let rowDiv = document.createElement("div");
         rowDiv.classList.add("row");
+        rowDiv.setAttribute("style", "background-color: #ddd;");
         let colDiv = document.createElement("div");
         colDiv.classList.add("col-md-8");
         colDiv.classList.add("cart");
@@ -437,9 +438,12 @@
           ProductRowDiv.appendChild(rowMainAlignDiv);
           colDiv.appendChild(ProductRowDiv);
         })
+        const totalPriceConst = shoppingCart["Price"].reduce((partial_sum, a) => partial_sum + a,0); 
+    
 
         let summaryDiv = document.createElement("div");
         summaryDiv.classList.add("col-md-4");
+        summaryDiv.setAttribute("style", "background-color: #ddd");
         summaryDiv.classList.add("summary");
         let summaryTitleDiv = document.createElement("div");
         let summaryTitleH5 = document.createElement("h1");
@@ -455,14 +459,14 @@
         let summaryPriceDiv = document.createElement("div");
         summaryPriceDiv.classList.add("col");
         summaryPriceDiv.classList.add("text-right");
-        summaryPriceDiv.innerHTML = "$" + "$" + totalPriceFn;
+        summaryPriceDiv.innerHTML = "$" + totalPriceConst;
         let shippingForm = document.createElement("form");
         let shippingP = document.createElement("p");
         shippingP.innerHTML = "SHIPPING";
         let shippingSelect = document.createElement("select");
         let selectOption = document.createElement("option");
         selectOption.classList.add("text-muted");
-        selectOption.innerHTML = "Standard-Delivery $5.00";
+        selectOption.innerHTML = "Standard-Delivery $0.00";
 
         let checkoutDiv = document.createElement("div");
         checkoutDiv.classList.add("row");
@@ -474,7 +478,7 @@
         totaPrice.classList.add("col");
         totalPriceDiv.classList.add("text-left");
         console.log(shoppingCart["Price"])
-        totaPrice.innerHTML = "$" + totalPriceFn;
+        totaPrice.innerHTML = "$" + totalPriceConst;
         let checkoutBtn = document.createElement("button");
         checkoutBtn.classList.add("btnCart");
         checkoutBtn.innerHTML = "CHECKOUT";
@@ -521,10 +525,6 @@
         });
       }
 
-      var totalPriceFn = shoppingCart["Price"].reduce(function(a, b){
-        return a + b;
-    }, 0);
-    
     
       function goBack(data, bootdeyDiv, a_IDS) {
           document.getElementById("footer").remove();
