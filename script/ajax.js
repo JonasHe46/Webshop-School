@@ -14,7 +14,7 @@ function ajaxRequest() {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', "/webshop/script/getData.php");
         xhr.onload = function () {
-          // console.log(this.response);
+          //console.log(this.response);
         };
         xhr.send(data);
         return false;
@@ -27,7 +27,6 @@ async function fetchDataAsync(url) {
    await fetch(url)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       mainPage(data);
     })
     .catch((error) => {

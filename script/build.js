@@ -322,7 +322,7 @@
       function addToShoppingCart(data, a_IDS, bootdeyDiv) {
         if(document.getElementById("cartCount")) {
           shoppingCart["Count"]++;
-          console.log("Test: ",shoppingCart["Price"])
+          // console.log("Test: ",shoppingCart["Price"])
           shoppingCart["Price"].push(parseFloat(data["Artikel"]["A_Preis"][a_IDS]));
           document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
         }else {
@@ -332,7 +332,7 @@
           number.classList.add("badge");
           number.classList.add("badge-warning");
           number.setAttribute("id", "cartCount");
-          number.classList.add
+          number.classList.add("d-flex")
           number.innerHTML = shoppingCart["Count"];
           shoppingCartLi.appendChild(number);
           document.getElementById("shoppingCart").classList.remove("sC3");
@@ -405,25 +405,28 @@
           // console.log("e: ", shoppingCart["Product"]["Name"][e]);
           let ProductRowDiv = document.createElement("div");
           ProductRowDiv.classList.add("row");
+          ProductRowDiv.setAttribute("style", "display: flex;")
           let rowMainAlignDiv = document.createElement("div");
           rowMainAlignDiv.classList.add("row");
           rowMainAlignDiv.classList.add("main");
           rowMainAlignDiv.classList.add("align-items-center");
           let imgDiv = document.createElement("div");
-          imgDiv.classList.add("col-2");
+          imgDiv.classList.add("col-md-5");
           let img = document.createElement("img");
           img.setAttribute("alt", shoppingCart["Product"]["Name"][e]);
           img.setAttribute("src", "img/" + shoppingCart["Product"]["Name"][e] + ".png");
           img.classList.add("img-fluid");
           // img.classList.add("z-depth-1");
-          img.classList.add("maxWidth");
+          img.classList.add("maxWidth2");
           let titleDiv = document.createElement("div");
-          titleDiv.classList.add("col");
+          titleDiv.classList.add("col-md-5");
+          titleDiv.classList.add("align-items-center");
           let title = document.createElement("div");
           title.classList.add("row");
           title.innerHTML = shoppingCart["Product"]["Name"][e];
           let priceDiv = document.createElement("div");
-          priceDiv.classList.add("col");
+          priceDiv.classList.add("col-md-2");
+          priceDiv.classList.add("align-items-center");
           priceDiv.innerHTML = "$" + shoppingCart["Product"]["Price"][e];
           
           // eventuell delete
@@ -458,7 +461,8 @@
         summaryItemDiv.innerHTML = "ITEMS " + shoppingCart["Count"];
         let summaryPriceDiv = document.createElement("div");
         summaryPriceDiv.classList.add("col");
-        summaryPriceDiv.classList.add("text-right");
+        summaryPriceDiv.setAttribute("style", "padding-left:0");
+        // summaryPriceDiv.classList.add("text-right");
         summaryPriceDiv.innerHTML = "$" + totalPriceConst;
         let shippingForm = document.createElement("form");
         let shippingP = document.createElement("p");
@@ -477,7 +481,7 @@
         let totaPrice = document.createElement("div");
         totaPrice.classList.add("col");
         totalPriceDiv.classList.add("text-left");
-        console.log(shoppingCart["Price"])
+        // console.log(shoppingCart["Price"])
         totaPrice.innerHTML = "$" + totalPriceConst;
         let checkoutBtn = document.createElement("button");
         checkoutBtn.classList.add("btnCart");
@@ -494,6 +498,9 @@
         summaryTitleDiv.appendChild(summaryTitleH5);
         summaryDiv.appendChild(summaryTitleDiv);
         summaryDiv.appendChild(summaryHr);
+        summaryPriceRowDiv.appendChild(summaryItemDiv);
+        summaryPriceRowDiv.appendChild(summaryPriceDiv);
+        summaryDiv.appendChild(summaryPriceRowDiv);
    
         shippingForm.appendChild(shippingP);
         shippingSelect.appendChild(selectOption);
@@ -505,23 +512,104 @@
         summaryDiv.appendChild(checkoutDiv);
         
         
-        summaryPriceRowDiv.appendChild(summaryItemDiv);
-        summaryPriceRowDiv.appendChild(summaryPriceDiv);
-        summaryDiv.appendChild(summaryPriceRowDiv);
+     
         summaryDiv.appendChild(checkoutBtn);
         rowDiv.appendChild(summaryDiv);
         mainCardDiv.appendChild(rowDiv);
         
         document.getElementById("bootdeyDiv").appendChild(mainCardDiv);
 
+        checkoutBtn.addEventListener("click", function() {
+          // console.log(shoppingCart["Product"])
+          $.ajax({
+            url: '/webshop/script/sendData.php',
+            type: "POST",
+            data: {data:shoppingCart["Product"]},
+            success: function(data) {
+//               <div class="jumbotron text-center">
+//   <h1 class="display-3">Thank You!</h1>
+//   <p class="lead"><strong>Please check your email</strong> for further instructions on how to complete your account setup.</p>
+//   <hr>
+//   <p>
+//     Having trouble? <a href="">Contact us</a>
+//   </p>
+//   <p class="lead">
+//     <a class="btn btn-primary btn-sm" href="https://bootstrapcreative.com/" role="button">Continue to homepage</a>
+//   </p>
+// </div>
+//              
+   
+              if(data == "false") {
+                mainCardDiv.innerHTML = "";
+                let confirmationDiv = document.createElement("div");
+                confirmationDiv.setAttribute("style", "background-color: white");
+                confirmationDiv.classList.add("jumbotron");
+                confirmationDiv.classList.add("text-center");
+                let confirmationH1 = document.createElement("h1");
+                confirmationH1.classList.add("display-3");
+                confirmationH1.innerHTML = "Ups... something went wrong";
+                let confirmationP = document.createElement("p");
+                confirmationP.innerHTML = "Please login first 🙂";
+                confirmationH1.setAttribute("style", "color: black");
+                confirmationP.setAttribute("style", "color: black");
+                let buttonP = document.createElement("p");
+                let buttonA = document.createElement("a");
+                buttonP.classList.add("lead");
+                buttonA.classList.add("btn");
+                buttonA.classList.add("btn-primary");
+                buttonA.classList.add("btn-sm");
+                buttonA.setAttribute("role", "button");
+                buttonA.innerHTML = "Click here to login :)";
+                buttonA.setAttribute("href", "login.html");
+                confirmationDiv.appendChild(confirmationH1);
+                confirmationDiv.appendChild(confirmationP);
+                buttonP.appendChild(buttonA);
+                confirmationDiv.appendChild(buttonP);
+                mainCardDiv.appendChild(confirmationDiv);
+                // buttonA.addEventListener("click", function() {
+
+                // })
+
+              }
+              if(data.substring(0,4) == "true") {
+                mainCardDiv.innerHTML = "";
+                let confirmationDiv = document.createElement("div");
+                confirmationDiv.setAttribute("style", "background-color: white");
+                confirmationDiv.classList.add("jumbotron");
+                confirmationDiv.classList.add("text-center");
+                let confirmationH1 = document.createElement("h1");
+                confirmationH1.classList.add("display-3");
+                confirmationH1.innerHTML = "Thank You";
+                let confirmationP = document.createElement("p");
+                confirmationP.innerHTML = "Yay, thank you for your order. We will take care that your package will be with you as soon as possible 🙂";
+                let buttonP = document.createElement("p");
+                let buttonA = document.createElement("a");
+                confirmationH1.setAttribute("style", "color: black");
+                confirmationP.setAttribute("style", "color: black");
+                buttonP.classList.add("lead");
+                buttonA.classList.add("btn");
+                buttonA.classList.add("btn-primary");
+                buttonA.classList.add("btn-sm");
+                buttonA.setAttribute("role", "button");
+                buttonA.innerHTML = "Continue shopping";
+                buttonA.setAttribute("href", "index.php");
+
+                confirmationDiv.appendChild(confirmationH1);
+                confirmationDiv.appendChild(confirmationP);
+                buttonP.appendChild(buttonA);
+                confirmationDiv.appendChild(buttonP);
+                mainCardDiv.appendChild(confirmationDiv);
+
+                // buttonA.addEventListener("click", function() {
+                //   goBack(data, bootdeyDiv);
+                // })
+              }
+            }
+          })
+        });
+
         backToShopBtn.addEventListener('click', function(){
           goBack(data, bootdeyDiv);
-          // console.log( this.parentElement)
-     
-          // bootdeyDiv.remove();
-          // document.getElementById("footer").remove();
-         
-          // mainPage(data);
         });
       }
 
