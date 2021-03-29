@@ -1,3 +1,4 @@
+    //shoppingCart array
     let shoppingCart = {};
     shoppingCart["Count"] = 1;
     shoppingCart["Product"] = {};
@@ -5,6 +6,7 @@
     shoppingCart["Product"]["Price"] = [];
     shoppingCart["Price"] = [];
     
+    //main Function to build the dynamic Page
     function mainPage(d, catID) {
        //create elements
         let data = d;
@@ -22,7 +24,7 @@
         bootdeyDiv.appendChild(mainNavDiv);
         htmlBody.appendChild(bootdeyDiv);
 
-        //call elementsß
+        //call elements
         addSearch(mainNavDiv);
         addCategory(data, mainNavDiv, bootdeyDiv, catID);
         // addProducts(data, mainNavDiv);
@@ -30,7 +32,9 @@
         buildFooter();
       }
 
+      //add footer on page
       function buildFooter() {
+        //Create elements and set attributes
         let footer = document.createElement("footer");
         footer.classList.add("freshTekFooter");
         footer.setAttribute("id", "footer");
@@ -42,12 +46,14 @@
         p.classList.add("text-white");
         p.innerHTML = "Fresh Tek";
 
+        // appen footer to DOM
         div.appendChild(p);
         footer.appendChild(div);
         document.getElementById("fT").appendChild(footer);
       }  
 
       function addSearch(mainNavDiv) {
+        //The function does not work
          //create elements
         let searchSection = document.createElement("section");
         let searchDiv = document.createElement("div");
@@ -132,9 +138,10 @@
         if(document.getElementById("cartMainDiv")) {
           switchCategory(id);
         }
+        //clear Div
         wipeCartDiv();
 
-
+        //Create elements and set attributes
         let cartMainDiv = document.createElement("div");
         let cartPanelSelection = document.createElement("section");
 
@@ -147,14 +154,10 @@
         cartDiv.classList.add("row");
         cartDiv.classList.add("product-list");
 
-       
-        // console.log("data: ", data, " id: ", id)
-      // console.log("click " + id)
+
+      //loop throgh data to add products from Database
       Object.keys(data["Artikel"]["A_IDS"]).forEach(a_IDS => {
         if(id.substring(8) == data["Artikel"]["A_KategorieID"][a_IDS]) {
-          // console.log("this id: ", id.substring(8))
-          // console.log("A_IDS: ", a_IDS)
-          // console.log(data["Artikel"]["A_Name"][a_IDS])
           let rowDiv = document.createElement("div");
           rowDiv.classList.add("col-md-4");
           let productName = data["Artikel"]["A_Name"][a_IDS]
@@ -166,51 +169,40 @@
           img.setAttribute("alt", productName);
           img.setAttribute("src", "img/" + productName + ".png")
           img.classList.add("productImg");
-          // let a = document.createElement("a");
-          // a.classList.add("adtocart");
-          // a.setAttribute("href", "#");
-          //  let i = document.createElement("i");
-          //  i.classList.add("fa");
-          //  i.classList.add("fa-shopping-cart");
-           let div2 = document.createElement("div");
-           div2.classList.add("panel-body");
-           div2.classList.add("text-center");
-           let h4 = document.createElement("h4");
-           let a2 = document.createElement("a");
-           a2.classList.add("pro-title");
-           a2.innerHTML = productName;
-           a2.setAttribute("style", "cursor:pointer")
-           let p= document.createElement("a");
-           p.classList.add("price");
-           p.innerHTML = "$" + data["Artikel"]["A_Preis"][a_IDS];
+          let div2 = document.createElement("div");
+          div2.classList.add("panel-body");
+          div2.classList.add("text-center");
+          let h4 = document.createElement("h4");
+          let a2 = document.createElement("a");
+          a2.classList.add("pro-title");
+          a2.innerHTML = productName;
+          a2.setAttribute("style", "cursor:pointer")
+          let p= document.createElement("a");
+          p.classList.add("price");
+          p.innerHTML = "$" + data["Artikel"]["A_Preis"][a_IDS];
 
-           div.appendChild(img);
-          //  a.appendChild(i);
-          //  div.appendChild(a);
-           section.appendChild(div);
-           h4.appendChild(a2);
-           div2.appendChild(h4);
-           div2.appendChild(p);
-           section.appendChild(div2);
-           rowDiv.appendChild(section);
-           cartDiv.appendChild(rowDiv);
+          // append elements to DOM
+          div.appendChild(img);
+          section.appendChild(div);
+          h4.appendChild(a2);
+          div2.appendChild(h4);
+          div2.appendChild(p);
+          section.appendChild(div2);
+          rowDiv.appendChild(section);
+          cartDiv.appendChild(rowDiv);
 
-            //on Product click
+          //on Product click
            a2.addEventListener('click', function(){
             showProduct(data, a_IDS, bootdeyDiv, productName);
         });
         }
       })
-
-
-      cartMainDiv.appendChild(cartPanelSelection);
-      cartMainDiv.appendChild(cartDiv);
-  
-  
+        cartMainDiv.appendChild(cartPanelSelection);
+        cartMainDiv.appendChild(cartDiv);
         bootdeyDiv.appendChild(cartMainDiv);
       }
 
-      
+      //to ensure that the correct category is selected
       function switchCategory(id) {
         document.querySelectorAll(".categorieSelect").forEach(function (categorie) {
           if (categorie.getAttribute("class").indexOf('active') > -1) {
@@ -221,7 +213,9 @@
       }
 
      function showProduct(data, a_IDS, bootdeyDiv, productName) {
+       //wipe Div
         wipeBootdeyDiv();
+        //Create elements and set attributes
         let productSection = document.createElement("section");
         productSection.classList.add("mb-5");
         let productMainRowDiv = document.createElement("div");
@@ -253,7 +247,7 @@
         productColDiv.appendChild(lightboxDivUi);
         productMainRowDiv.appendChild(productColDiv);
         
-
+        //Create elements and set attributes
         let textDiv = document.createElement("div");
         textDiv.classList.add("col-md-6");
         let title = document.createElement("h3");
@@ -273,7 +267,6 @@
         descriptionP.innerHTML = data["Artikel"]["A_Beschreibung"][a_IDS];
         let hr = document.createElement("hr");
         let button = document.createElement("button");
-        
         button.setAttribute("type", "button");
         button.classList.add("btn");
         button.classList.add("btn-primary");
@@ -285,17 +278,8 @@
         let arrowLeftI = document.createElement("span");
         arrowLeftI.classList.add("glyphicon");
         arrowLeftI.classList.add("glyphicon-arrow-left");
-        // arrowLeftI.classList.add("bi-lg");
-        
-     
-    
-      //   <div class="d-flex justify-content-between align-items-center mb-3">
-      //   <h5 class="card-title mb-0">Card title</h5>
-      //   <button type="button" class="btn btn-success">Primary</button>
-      // </div>
 
-
-
+        //append Elements
         arrowLeftBtn.appendChild(arrowLeftI);
         textDiv.appendChild(arrowLeftBtn);
         textDiv.appendChild(title)
@@ -319,15 +303,17 @@
         });
       }
 
+
       function addToShoppingCart(data, a_IDS, bootdeyDiv) {
         if(document.getElementById("cartCount")) {
+          //count entire Products array Counter
           shoppingCart["Count"]++;
-          // console.log("Test: ",shoppingCart["Price"])
+          //add element to array;
           shoppingCart["Price"].push(parseFloat(data["Artikel"]["A_Preis"][a_IDS]));
           document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
         }else {
+          // Create elements and set attributes
           let shoppingCartLi = document.getElementById("shoppingCartLi");
-          //  <span class='badge badge-warning' id='lblCartCount'> 2 </span><
           let number = document.createElement("span");
           number.classList.add("badge");
           number.classList.add("badge-warning");
@@ -337,19 +323,24 @@
           shoppingCartLi.appendChild(number);
           document.getElementById("shoppingCart").classList.remove("sC3");
           document.getElementById("shoppingCart").classList.add("sC2");
+          //add element to array
           shoppingCart["Price"].push(parseFloat(data["Artikel"]["A_Preis"][a_IDS]));
 
+          //click on ShoppingCart
           document.getElementById("shoppingCart").addEventListener('click', function(){
             shoppingCartView(bootdeyDiv, data);
           });
         }
+        //add element to array
         shoppingCart["Product"]["Name"].push(data["Artikel"]["A_Name"][a_IDS]);
         shoppingCart["Product"]["Price"].push(data["Artikel"]["A_Preis"][a_IDS]);
         
       }
 
       function shoppingCartView(bootdeyDiv, data) {
+        //wipe Div
         wipeBootdeyDiv();
+        // Create elements and set attributes
         let mainCardDiv = document.createElement("div");
         mainCardDiv.classList.add("card");
         let rowDiv = document.createElement("div");
@@ -373,11 +364,13 @@
         generalCountDiv.classList.add("text-muted");
         generalCountDiv.innerHTML = shoppingCart["Count"] + " Items"
 
+        //appen title
         titleh4.appendChild(title);
         titleColDiv.appendChild(titleh4);
         titleRowDiv.appendChild(titleColDiv);
         titleRowDiv.appendChild(generalCountDiv);
 
+        //create back button
         let backToShop = document.createElement("div");
         backToShop.classList.add("back-to-shop");
         let backToShopBtn = document.createElement("button");
@@ -389,20 +382,21 @@
         let backToShopSpan = document.createElement("span");
         backToShopSpan.classList.add("text-muted");
         backToShopSpan.innerHTML = " Back to shop";
+        //append Back button
         backToShop.appendChild(backToShopBtn);
         backToShop.appendChild(backToShopSpan);
 
  
-
+        //append elements
         colDiv.appendChild(backToShop);
         colDiv.appendChild(titleRowDiv);
         
         titleDiv.appendChild(colDiv);
         rowDiv.appendChild(titleDiv);
        
-        // console.log(shoppingCart["Product"]["Name"])
+        //loop through elements in my shopping Cart
         Object.keys(shoppingCart["Product"]["Name"]).forEach(e => {
-          // console.log("e: ", shoppingCart["Product"]["Name"][e]);
+          // Create elements and set attributes
           let ProductRowDiv = document.createElement("div");
           ProductRowDiv.classList.add("row");
           ProductRowDiv.setAttribute("style", "display: flex;")
@@ -432,7 +426,7 @@
           // eventuell delete
           // let priceSpan = document.createElement("span");
         
-        
+          // append elements from my shoppingCart to my CartView
           imgDiv.appendChild(img);
           titleDiv.appendChild(title);
           rowMainAlignDiv.appendChild(imgDiv);
@@ -441,9 +435,9 @@
           ProductRowDiv.appendChild(rowMainAlignDiv);
           colDiv.appendChild(ProductRowDiv);
         })
+        //calculate total price
         const totalPriceConst = shoppingCart["Price"].reduce((partial_sum, a) => partial_sum + a,0); 
-    
-
+        // Create elements and set attributes
         let summaryDiv = document.createElement("div");
         summaryDiv.classList.add("col-md-4");
         summaryDiv.setAttribute("style", "background-color: #ddd");
@@ -462,7 +456,6 @@
         let summaryPriceDiv = document.createElement("div");
         summaryPriceDiv.classList.add("col");
         summaryPriceDiv.setAttribute("style", "padding-left:0");
-        // summaryPriceDiv.classList.add("text-right");
         summaryPriceDiv.innerHTML = "$" + totalPriceConst;
         let shippingForm = document.createElement("form");
         let shippingP = document.createElement("p");
@@ -471,7 +464,6 @@
         let selectOption = document.createElement("option");
         selectOption.classList.add("text-muted");
         selectOption.innerHTML = "Standard-Delivery $0.00";
-
         let checkoutDiv = document.createElement("div");
         checkoutDiv.classList.add("row");
         checkoutDiv.setAttribute("style", "border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;");
@@ -481,19 +473,12 @@
         let totaPrice = document.createElement("div");
         totaPrice.classList.add("col");
         totalPriceDiv.classList.add("text-left");
-        // console.log(shoppingCart["Price"])
         totaPrice.innerHTML = "$" + totalPriceConst;
         let checkoutBtn = document.createElement("button");
         checkoutBtn.classList.add("btnCart");
         checkoutBtn.innerHTML = "CHECKOUT";
-      
 
-
-        // shippingSelect.appendChild(selectOption);
-        // shippingForm.appendChild(shippingP);
-        // shippingForm.appendChild(shippingSelect);
-        // summaryDiv.appendChild(shippingForm);
-
+        // append element to DOM
         summaryTitleH5.appendChild(summaryTitleBr);
         summaryTitleDiv.appendChild(summaryTitleH5);
         summaryDiv.appendChild(summaryTitleDiv);
@@ -510,8 +495,6 @@
         checkoutDiv.appendChild(totalPriceDiv);
         checkoutDiv.appendChild(totaPrice);
         summaryDiv.appendChild(checkoutDiv);
-        
-        
      
         summaryDiv.appendChild(checkoutBtn);
         rowDiv.appendChild(summaryDiv);
@@ -519,26 +502,16 @@
         
         document.getElementById("bootdeyDiv").appendChild(mainCardDiv);
 
+        //click Checkout button.
         checkoutBtn.addEventListener("click", function() {
-          // console.log(shoppingCart["Product"])
+          //call Php to send order to the sql Db
+          //DATA = send parameter from js to php
           $.ajax({
             url: '/webshop/script/sendData.php',
             type: "POST",
             data: {data:shoppingCart["Product"]},
             success: function(data) {
-//               <div class="jumbotron text-center">
-//   <h1 class="display-3">Thank You!</h1>
-//   <p class="lead"><strong>Please check your email</strong> for further instructions on how to complete your account setup.</p>
-//   <hr>
-//   <p>
-//     Having trouble? <a href="">Contact us</a>
-//   </p>
-//   <p class="lead">
-//     <a class="btn btn-primary btn-sm" href="https://bootstrapcreative.com/" role="button">Continue to homepage</a>
-//   </p>
-// </div>
-//              
-   
+              //if data is false the user is not logged in
               if(data == "false") {
                 mainCardDiv.innerHTML = "";
                 let confirmationDiv = document.createElement("div");
@@ -566,11 +539,9 @@
                 buttonP.appendChild(buttonA);
                 confirmationDiv.appendChild(buttonP);
                 mainCardDiv.appendChild(confirmationDiv);
-                // buttonA.addEventListener("click", function() {
-
-                // })
-
               }
+
+              //if data is true the order was successfully added to the database
               if(data.substring(0,4) == "true") {
                 mainCardDiv.innerHTML = "";
                 let confirmationDiv = document.createElement("div");
@@ -599,30 +570,27 @@
                 buttonP.appendChild(buttonA);
                 confirmationDiv.appendChild(buttonP);
                 mainCardDiv.appendChild(confirmationDiv);
-
-                // buttonA.addEventListener("click", function() {
-                //   goBack(data, bootdeyDiv);
-                // })
               }
             }
           })
         });
 
+        //click back to Shop button
         backToShopBtn.addEventListener('click', function(){
           goBack(data, bootdeyDiv);
         });
       }
 
     
+      //goBack ensures that the previous page is called up
       function goBack(data, bootdeyDiv, a_IDS) {
           document.getElementById("footer").remove();
-  
           document.getElementById("bootdeyDiv").remove();
-          // console.log(this.parentElement)
           mainPage(data, data["Artikel"]["A_KategorieID"][a_IDS]);
       }
 
 
+      // Ensures that the div is empty
       function wipeCartDiv() {
         if(document.getElementById("cartMainDiv")) {
           document.getElementById("cartMainDiv").remove();
@@ -630,22 +598,11 @@
         }
       }
 
+      // Ensures that the div is empty
       function wipeBootdeyDiv() {
         if(document.getElementById("bootdeyDiv")) {
           document.getElementById("bootdeyDiv").innerHTML = "";
         }
       }
-
-      // Element.prototype.remove = function() {
-      //   this.parentElement.removeChild(this);
-    // }
-    // NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-    //     for(var i = this.length - 1; i >= 0; i--) {
-    //         if(this[i] && this[i].parentElement) {
-    //             this[i].parentElement.removeChild(this[i]);
-    //         }
-    //     }
-    // }
-
 
       export { mainPage };

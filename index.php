@@ -8,91 +8,25 @@
   <title>FreshTek</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- add style elements -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/webshop/css/style.css">
+
 </head>
 <body id="fT" data-spy="scroll" data-target=".navbar" data-offset="60">
-<!-- <div class="card">
-    <div class="row">
-        <div class="col-md-8 cart">
-            <div class="title">
-                <div class="row">
-                    <div class="col">
-                        <h4><b>Shopping Cart</b></h4>
-                    </div>
-                    <div class="col align-self-center text-right text-muted">3 items</div>
-                </div>
-            </div>
-            <div class="row border-top border-bottom">
-                <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid imgCart" src="https://i.imgur.com/1GrakTl.jpg"></div>
-                    <div class="col">
-                        <div class="row text-muted">Shirt</div>
-                        <div class="row">Cotton T-shirt</div>
-                    </div>
-                    <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                    <div class="col">
-                        <div class="row text-muted">Shirt</div>
-                        <div class="row">Cotton T-shirt</div>
-                    </div>
-                    <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                </div>
-            </div>
-            <div class="row border-top border-bottom">
-                <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                    <div class="col">
-                        <div class="row text-muted">Shirt</div>
-                        <div class="row">Cotton T-shirt</div>
-                    </div>
-                    <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                </div>
-            </div>
-            <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
-        </div>
-        <div class="col-md-4 summary">
-            <div>
-                <h5><b>Summary</b></h5>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col" style="padding-left:0;">ITEMS 3</div>
-                <div class="col text-right">&euro; 132.00</div>
-            </div>
-            <form>
-                <p>SHIPPING</p> <select>
-                    <option class="text-muted">Standard-Delivery- &euro;5.00</option>
-                </select>
-                <p>GIVE CODE</p> <input id="code" placeholder="Enter your code">
-            </form>
-            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                <div class="col">TOTAL PRICE</div>
-                <div class="col text-right">&euro; 137.00</div>
-            </div> <button class="btnCart">CHECKOUT</button>
-        </div>
-    </div>
-</div> -->
   <nav class="navbar navbar-default navbar-fixed-top">
   
     <div class="container">
-		<a class="navbar-brand fTLogoText" href="#fT">FreshTek</a>
+		<a class="navbar-brand fTLogoText" href="index.php">FreshTek</a>
 		<div class="collapse navbar-collapse" id="navbar">
 	 
+		   <!-- nav Categorys -->
 		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="#shop">Shop</a></li>
+			<li><a href="index.php">Shop</a></li>
 			<li><a href="#service">Service</a></li>
 			<li><a href="#about">About us</a></li>
 			<li><a href="#contact">Contact</a></li>
@@ -100,6 +34,7 @@
 			<?php
 				if(!isset($_SESSION["name"])) {
 			?>
+			<!-- login button  -->
 			<li class="mt-3 logInBtn" > <p ><a href="login.html" class="btn btn-info" id="loginBtn">
 				<span class="glyphicon glyphicon-user "></span>Login 
 			  </a></p>
@@ -119,7 +54,6 @@
 
 				<!-- shopping cart -->
 			 <li id="shoppingCartLi"><i id="shoppingCart" class="fa sC sC3" style="font-size:24px">&#xf07a;</i>
-				<!-- <span class='badge badge-warning' id='lblCartCount'> 2 </span> -->
 			</li> 
 		  </ul>
 		</div>
@@ -135,7 +69,7 @@
     </div>
   </nav>
 
-
+   <!-- page headline -->
   <div class="jumbotron text-center">
     <h1>Fresh Tek</h1> 
     <p> teck for your needs!</p> 
@@ -190,304 +124,11 @@
 	</div>
   </div>
 
-  <!-- cards -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
- <!--  <div class="container bootdey">
-	  <div class="col-md-3">
-		  <section class="panel">
-			  <div class="panel-body">
-				  <input type="text" placeholder="Keyword Search" class="form-control" />
-			  </div>
-		  </section>
-		  <section class="panel">
-			  <header class="panel-heading">
-				  Category
-			  </header>
-			  <div class="panel-body">
-				  <ul class="nav prod-cat">
-					  <li>
-						  <a class="active"><i class="fa fa-angle-right"></i> Handy's</a>
-						  <ul class="nav">
-							  <li class="active"><a href="#">- IPhone</a></li>
-							  <li><a href="#">- Samsung</a></li>
-							  <li><a href="#">- OnePlus</a></li>
-						  </ul> 
-					  </li>
-					  <li>
-						<a ><i class="fa fa-angle-right"></i> Tablets</a>
-					</li>
-					  <li>
-						  <a ><i class="fa fa-angle-right"></i> Computer</a>
-					  </li>
-					  <li>
-						  <a ><i class="fa fa-angle-right"></i> Notebooks</a>
-					  </li>
-				
-				  </ul>
-			  </div>
-		  </section> -->
-		  <!-- price range  -->
-		  <!-- <section class="panel">
-			  <header class="panel-heading">
-				  Price Range
-			  </header>
-			  <div class="panel-body sliders">
-				  <div id="slider-range" class="slider"></div>
-				  <div class="slider-info">
-					  <span id="slider-range-amount"></span>
-				  </div>
-			  </div>
-		  </section> -->
-
-		  <!-- Filter -->
-		  <!-- <section class="panel">
-			  <header class="panel-heading">
-				  Filter
-			  </header>
-			  <div class="panel-body">
-				  <form role="form product-form">
-					  <div class="form-group">
-						  <label>Brand</label>
-						  <select class="form-control hasCustomSelect" style="-webkit-appearance: menulist-button; width: 231px; position: absolute; opacity: 0; height: 34px; font-size: 12px;">
-							  <option>Wallmart</option>
-							  <option>Catseye</option>
-							  <option>Moonsoon</option>
-							  <option>Textmart</option>
-						  </select>
-						  <span class="customSelect form-control" style="display: inline-block;"><span class="customSelectInner" style="width: 209px; display: inline-block;">Wallmart</span></span>
-					  </div>
-					  <div class="form-group">
-						  <label>Color</label>
-						  <select class="form-control hasCustomSelect" style="-webkit-appearance: menulist-button; width: 231px; position: absolute; opacity: 0; height: 34px; font-size: 12px;">
-							  <option>White</option>
-							  <option>Black</option>
-							  <option>Red</option>
-							  <option>Green</option>
-						  </select>
-						  <span class="customSelect form-control" style="display: inline-block;"><span class="customSelectInner" style="width: 209px; display: inline-block;">White</span></span>
-					  </div>
-					  <div class="form-group">
-						  <label>Type</label>
-						  <select class="form-control hasCustomSelect" style="-webkit-appearance: menulist-button; width: 231px; position: absolute; opacity: 0; height: 34px; font-size: 12px;">
-							  <option>Small</option>
-							  <option>Medium</option>
-							  <option>Large</option>
-							  <option>Extra Large</option>
-						  </select>
-						  <span class="customSelect form-control" style="display: inline-block;"><span class="customSelectInner" style="width: 209px; display: inline-block;">Small</span></span>
-					  </div>
-					  <button class="btn btn-primary" type="submit">Filter</button>
-				  </form>
-			  </div>
-		  </section> -->
-
-		<!-- Best Seller -->
-		  <!-- <section class="panel">
-			  <header class="panel-heading">
-				  Best Seller
-			  </header>
-			  <div class="panel-body">
-				  <div class="best-seller">
-					  <article class="media">
-						  <a class="pull-left thumb p-thumb">
-							  <img src="https://via.placeholder.com/250x220/FFB6C1/000000" />
-						  </a>
-						  <div class="media-body">
-							  <a href="#" class="p-head">Item One Tittle</a>
-							  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						  </div>
-					  </article>
-					  <article class="media">
-						  <a class="pull-left thumb p-thumb">
-							  <img src="https://via.placeholder.com/250x220/A2BE2/000000" />
-						  </a>
-						  <div class="media-body">
-							  <a href="#" class="p-head">Item Two Tittle</a>
-							  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						  </div>
-					  </article>
-					  <article class="media">
-						  <a class="pull-left thumb p-thumb">
-							  <img src="https://via.placeholder.com/250x220/6495ED/000000" />
-						  </a>
-						  <div class="media-body">
-							  <a href="#" class="p-head">Item Three Tittle</a>
-							  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						  </div>
-					  </article>
-				  </div>
-			  </div>
-		  </section>
-	  </div>
-	  <div class="col-md-9">
-		  <section class="panel">
-			  <div class="panel-body">
-				  <div class="pull-right">
-					  <ul class="pagination pagination-sm pro-page-list">
-						  <li><a href="#">1</a></li>
-						  <li><a href="#">2</a></li>
-						  <li><a href="#">3</a></li>
-						  <li><a href="#">»</a></li>
-					  </ul>
-				  </div>
-			  </div> -->
-		 <!--  </section>
-  
-		  <div class="row product-list">
-			  <div class="col-md-4">
-				  <section class="panel">
-					  <div class="pro-img-box">
-						  <img src="img/iphone12P.jpg" alt="Iphone12Pro" />
-						  <a href="#" class="adtocart">
-							  <i class="fa fa-shopping-cart"></i>
-						  </a>
-					  </div>
-  
-					  <div class="panel-body text-center">
-						  <h4>
-							  <a href="#" class="pro-title">
-								  IPhone 12 Pro
-							  </a>
-						  </h4>
-						  <p class="price">$1200.00</p>
-					  </div>
-				  </section>
-			  </div>
-			  <div class="col-md-4">
-				  <section class="panel">
-					  <div class="pro-img-box">
-						  <img src="img/huaweip40lite.jpg" alt="" />
-						  <a href="#" class="adtocart">
-							  <i class="fa fa-shopping-cart"></i>
-						  </a>
-					  </div>
-  
-					  <div class="panel-body text-center">
-						  <h4>
-							  <a href="#" class="pro-title">
-								  Huawei P40 Lite
-							  </a>
-						  </h4>
-						  <p class="price">$1000.00</p>
-					  </div>
-				  </section>
-			  </div>
-			  <div class="col-md-4">
-				  <section class="panel">
-					  <div class="pro-img-box">
-						  <img src="img/GalaxyS215G.png" alt="" />
-						  <a href="#" class="adtocart">
-							  <i class="fa fa-shopping-cart"></i>
-						  </a>
-					  </div>
-  
-					  <div class="panel-body text-center">
-						  <h4>
-							  <a href="#" class="pro-title">
-								  Galaxy S21 5G
-							  </a>
-						  </h4>
-						  <p class="price">$1300.00</p>
-					  </div>
-				  </section>
-			  </div>
-			  <div class="col-md-4">
-				  <section class="panel">
-					  <div class="pro-img-box">
-						  <img src="img/OnePlusNordPhone.jpg" alt="" />
-						  <a href="#" class="adtocart">
-							  <i class="fa fa-shopping-cart"></i>
-						  </a>
-					  </div>
-  
-					  <div class="panel-body text-center">
-						  <h4>
-							  <a href="#" class="pro-title">
-								  One Plus Nord
-							  </a>
-						  </h4>
-						  <p class="price">$600.00</p>
-					  </div>
-				  </section>
-			  </div>
-			  <div class="col-md-4">
-				  <section class="panel">
-					  <div class="pro-img-box">
-						  <img src="img/IphoneSe2020.jpg" alt="IphoneSe" />
-						  <a href="#" class="adtocart">
-							  <i class="fa fa-shopping-cart"></i>
-						  </a>
-					  </div>
-  
-					  <div class="panel-body text-center">
-						  <h4>
-							  <a href="#" class="pro-title">
-								  Iphone SE
-							  </a>
-						  </h4>
-						  <p class="price">$500.00</p>
-					  </div>
-				  </section>
-			  </div>
-			  <div class="col-md-4">
-				  <section class="panel">
-					  <div class="pro-img-box">
-						  <img src="img/OppoA91.jpg" alt="" />
-						  <a href="#" class="adtocart">
-							  <i class="fa fa-shopping-cart"></i>
-						  </a>
-					  </div>
-  
-					  <div class="panel-body text-center">
-						  <h4>
-							  <a href="#" class="pro-title">
-								  Oppo A91
-							  </a>
-						  </h4>
-						  <p class="price">$400.00</p>
-					  </div>
-				  </section>
-			  </div>
-		  </div>
-	  </div>
-  </div> -->
-
-  <!-- login -->
-<!-- <div class="container login-container">
-	<div class="row">
-		<div class="col-md-6 login-form-1">
-			<h3>Login</h3>
-			<form action="createuser.php" method="POST">
-				<div class="form-group">
-					<input type="text" class="form-control" name="name" placeholder="Your Email *" required />
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" name="password" placeholder="Your Password *" required />
-				</div>
-				<div class="form-group">
-					<input type="submit" class="btnSubmit" name="submit" value="Login" />
-				</div>
-				<div class="form-group ">
-					<a href="#" class="ForgetPwd">Forget Password?</a>
-				</div>
-			</form>
-		</div>
-	</div>
-</div> -->
-
-  
-  <!-- Footer -->
-  <!-- <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">FreshTek</p>
-    </div> -->
-    <!-- /.container -->
-  <!-- </footer> -->
-  <!-- Bootstrap core JavaScript -->
-  <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
-  <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+  <!-- include script -->
   <script type="module" src="/webshop/script/script.js"></script>
   <script type="module" src="/webshop/script/ajax.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>
 

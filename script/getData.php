@@ -11,11 +11,9 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } 
 
-//empty Array
+//create empty Array
 $arr = [];
-// array categories
-// $arr["Kategorien"] = [];
-// $arr["Artikel"] = [];
+
 //kategorien
 $arr["Kategorie"]["KategorieID"] = [];
 $arr["Kategorie"]["KategorieName"] = [];
@@ -27,8 +25,9 @@ $arr["Artikel"]["A_Beschreibung"] = [];
 $arr["Artikel"]["A_Preis"] = [];
 $arr["Artikel"]["A_Bild"] = [];
 $arr["Artikel"]["A_KategorieID"] = [];
-$sql = "SELECT * FROM artikel
-     LEFT JOIN kategorie ON artikel.kategorie_ID = kategorie.kategorie_ID";
+
+//sql query
+$sql = "SELECT * FROM artikel LEFT JOIN kategorie ON artikel.kategorie_ID = kategorie.kategorie_ID";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
@@ -39,23 +38,11 @@ if ($result->num_rows > 0) {
   array_push($arr["Artikel"]["A_Beschreibung"], $row["A_Beschreibung"]);
   array_push($arr["Artikel"]["A_Preis"], $row["A_Preis"]);
   array_push($arr["Artikel"]["A_KategorieID"], $row["kategorie_ID"]);
-
-
   }
-
-  
-  
-
-
-
-  
-  
-} 
-
-else {
+}else {
   echo "0 results";
 }
-
+//second query
 $resultKat = $conn->query("SELECT * FROM kategorie");
 
 if($resultKat->num_rows > 0) {
@@ -72,7 +59,6 @@ if($resultKat->num_rows > 0) {
   $rows = $result->fetch_all(MYSQLI_ASSOC);
   $rows = $resultKat->fetch_all(MYSQLI_ASSOC);
 }
-  
 
 $conn->close();
 ?>

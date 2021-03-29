@@ -1,16 +1,8 @@
 import { mainPage } from "./build.js";
 
-
+//call Php schript from javascript Function
 function ajaxRequest() {
-
-
-   
-        // (B1) GET FORM DATA
         var data = new FormData();
-        // data.append('name', document.getElementById("user-name").value);
-        // data.append('email', document.getElementById("user-email").value);
-       
-        // (B2) AJAX CALL
         var xhr = new XMLHttpRequest();
         xhr.open('POST', "/webshop/script/getData.php");
         xhr.onload = function () {
@@ -22,7 +14,7 @@ function ajaxRequest() {
     
 }
 
-
+//get Data from Php in Javascript
 async function fetchDataAsync(url) {
    await fetch(url)
     .then(response => response.json())

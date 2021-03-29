@@ -16,15 +16,18 @@
 </head>
 <body>
     <?php
+        //create connection
         include_once ("db.php");
         session_start();
         
-
+        //Checks if name and password are available.
         if(isset($_POST["name"]) && isset($_POST["password"])){
             $user = $_POST["name"];
             $pass = $_POST["password"];
+            //sql query
             $request = $mysqli->query("SELECT * FROM benutzer WHERE Username LIKE '$user'");
 
+            //loop through data
             while($row = $request->fetch_array()){
                 $passsql = $row["Password"];
                 if(password_verify($pass, $passsql)) {
