@@ -31,6 +31,9 @@ $(document).ready(function(){
       alert("test")
     }
     
+    $("#prospects_form").submit(function(e) {
+      e.preventDefault();
+  });
     
     function datenschutzBanner() {
      let element = document.getElementById("DatenschutzID");

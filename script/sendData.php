@@ -1,20 +1,24 @@
 <?php
 
-    session_start();
+    // session_start();
     // Create connection
     $mysqli = new mysqli("localhost", "root","","webshop");
     if($mysqli->connect_error) {
         echo "didnt work  ";
     }
-
+    // echo "test";
+    // echo $_POST["data"]["usr"];
+    
     //if user is logged in and we get our data from javascript
-  if(isset($_SESSION["name"]) && isset($_POST["data"])){
-    $name = $_SESSION["name"];
+  if(isset($_POST["data"]["usr"]) && isset($_POST["data"]["sc"])){
+    $name = $_POST["data"]["usr"];
 
     //first sql query
     $sqlGet = "SELECT * FROM benutzer WHERE Username LIKE '$name'";
-    $data = $_POST["data"];
-    
+    $data = $_POST["data"]["sc"];
+    echo $data["data"]["sc"];
+    // echo "if";
+
     $resultGet = $mysqli->query($sqlGet);
     while($row = $resultGet->fetch_array()){
         $U_ID = $row["ID"];
@@ -50,13 +54,19 @@
         while($row = $resultIdGet->fetch_array()) {
             $ID = $row["A_ID"];
             $Price = $row["A_Preis"];
-
+            // echo $ID;
+            // echo " $Price";
             //send data to the Database
              $sqlOrderDetails = "INSERT INTO bestelldetails (Bestell_Nr, A_ID, Einzelpreis) VALUES ('$OrderNumber', '$ID', '$Price')";
              $sendOrderDetails = $mysqli->query($sqlOrderDetails);
             //  returns true to Javascript. Sending the data was successful.
              echo "true";
-             //error handlich
+
+            // Incorrect integer value: '' for column `webshop`.`bestelldetails`.`Bestell_Nr` at row 1"
+            
+            //error handling
+
+            //hier fehler
              if(!$sendOrderDetails) {
                 echo("Fehler: ". $mysqli->error);
             }  

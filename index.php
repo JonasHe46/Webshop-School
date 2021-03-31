@@ -31,26 +31,18 @@
 			<li><a href="#about">About us</a></li>
 			<li><a href="#contact">Contact</a></li>
 
-			<?php
-				if(!isset($_SESSION["name"])) {
-			?>
+		
 			<!-- login button  -->
-			<li class="mt-3 logInBtn" > <p ><a href="login.html" class="btn btn-info" id="loginBtn">
-				<span class="glyphicon glyphicon-user "></span>Login 
-			  </a></p>
+			<li class="mt-3 logInBtn" > <p ><a class="btn btn-info" id="loginBtn">Login</a></p>
 			 </li>
 
-			<?php
-				}else {
-			?>
-			<li class="mt-3 logInBtn" > <p ><a href="logout.php" class="btn btn-info" id="logoutBtn">
+		
+			<!-- <li class="mt-3 logInBtn" > <p ><a href="logout.php" class="btn btn-info" id="logoutBtn">
 				<span class="glyphicon glyphicon-user "></span>Logout 
 			  </a></p>
-			 </li>
+			 </li> -->
 
-			 <?php
-				}
-			 ?>
+
 
 				<!-- shopping cart -->
 			 <li id="shoppingCartLi"><i id="shoppingCart" class="fa sC sC3" style="font-size:24px">&#xf07a;</i>
@@ -77,7 +69,7 @@
 
 
 <!-- carousel -->
-<div class="container">
+<div class="container" id="carousel">
 	<h2>Powerful. Wonderful. Brilliant </h2>  
 	<div id="myCarousel" class="carousel slide w-50" data-ride="carousel">
 	  <!-- Indicators -->

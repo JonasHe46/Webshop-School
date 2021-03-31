@@ -1,4 +1,6 @@
-    //shoppingCart array
+import { buildLogin, logoutFn } from "./login.js";
+
+  //shoppingCart array
     let shoppingCart = {};
     shoppingCart["Count"] = 1;
     shoppingCart["Product"] = {};
@@ -31,6 +33,70 @@
         // addProducts(data, mainNavDiv);
 
         buildFooter();
+        if(!getCookie("username") == "") {
+
+          document.getElementById("loginBtn").innerHTML ="Logout";
+        }else {
+          document.getElementById("loginBtn").innerHTML ="Login";
+        }
+
+        document.getElementById("loginBtn").addEventListener("click", function() {
+          if(!getCookie("username") == "") {
+            // console.log("logout");
+            logoutFn();
+          }
+          if(getCookie("username") == "") {
+            // console.log("login")
+            document.getElementById("carousel").classList.add("dNone");
+                  wipeBootdeyDiv();
+                  buildLogin();
+          }
+        })
+    
+        // if(!getCookie("username") == "") {
+        //   document.getElementById("loginBtn").innerHTML = "Logout";
+        //   document.getElementById("loginBtn").addEventListener("click", function() {
+        //     // alert("login")
+        //     console.log(document.getElementById("loginBtn").value)
+
+        //       logoutFn();
+            
+            
+        //   })
+        // }else {
+        //   document.getElementById("loginBtn").addEventListener("click", function() {
+        //     // alert("login")
+        //     console.log(document.getElementById("loginBtn").value)
+     
+            
+        //       document.getElementById("carousel").classList.add("dNone");
+        //       wipeBootdeyDiv();
+        //       buildLogin();
+            
+            
+        //   })
+        // }
+
+      
+
+       
+
+      }
+
+      function getCookie(x) {
+        var name = x + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
       }
 
       //add footer on page
@@ -542,75 +608,115 @@
 
         //click Checkout button.
         checkoutBtn.addEventListener("click", function() {
+          // console.log("click")
           //call Php to send order to the sql Db
           //DATA = send parameter from js to php
-          $.ajax({
-            url: '/webshop/script/sendData.php',
-            type: "POST",
-            data: {data:shoppingCart["Product"]},
-            success: function(data) {
-              //if data is false the user is not logged in
-              if(data == "false") {
-                mainCardDiv.innerHTML = "";
-                let confirmationDiv = document.createElement("div");
-                confirmationDiv.setAttribute("style", "background-color: white");
-                confirmationDiv.classList.add("jumbotron");
-                confirmationDiv.classList.add("text-center");
-                let confirmationH1 = document.createElement("h1");
-                confirmationH1.classList.add("display-3");
-                confirmationH1.innerHTML = "Ups... something went wrong";
-                let confirmationP = document.createElement("p");
-                confirmationP.innerHTML = "Please login first 🙂";
-                confirmationH1.setAttribute("style", "color: black");
-                confirmationP.setAttribute("style", "color: black");
-                let buttonP = document.createElement("p");
-                let buttonA = document.createElement("a");
-                buttonP.classList.add("lead");
-                buttonA.classList.add("btn");
-                buttonA.classList.add("btn-primary");
-                buttonA.classList.add("btn-sm");
-                buttonA.setAttribute("role", "button");
-                buttonA.innerHTML = "Click here to login :)";
-                buttonA.setAttribute("href", "login.html");
-                confirmationDiv.appendChild(confirmationH1);
-                confirmationDiv.appendChild(confirmationP);
-                buttonP.appendChild(buttonA);
-                confirmationDiv.appendChild(buttonP);
-                mainCardDiv.appendChild(confirmationDiv);
-              }
-
-              //if data is true the order was successfully added to the database
-              if(data.substring(0,4) == "true") {
-                mainCardDiv.innerHTML = "";
-                let confirmationDiv = document.createElement("div");
-                confirmationDiv.setAttribute("style", "background-color: white");
-                confirmationDiv.classList.add("jumbotron");
-                confirmationDiv.classList.add("text-center");
-                let confirmationH1 = document.createElement("h1");
-                confirmationH1.classList.add("display-3");
-                confirmationH1.innerHTML = "Thank You";
-                let confirmationP = document.createElement("p");
-                confirmationP.innerHTML = "Yay, thank you for your order. We will take care that your package will be with you as soon as possible 🙂";
-                let buttonP = document.createElement("p");
-                let buttonA = document.createElement("a");
-                confirmationH1.setAttribute("style", "color: black");
-                confirmationP.setAttribute("style", "color: black");
-                buttonP.classList.add("lead");
-                buttonA.classList.add("btn");
-                buttonA.classList.add("btn-primary");
-                buttonA.classList.add("btn-sm");
-                buttonA.setAttribute("role", "button");
-                buttonA.innerHTML = "Continue shopping";
-                buttonA.setAttribute("href", "index.php");
-
-                confirmationDiv.appendChild(confirmationH1);
-                confirmationDiv.appendChild(confirmationP);
-                buttonP.appendChild(buttonA);
-                confirmationDiv.appendChild(buttonP);
-                mainCardDiv.appendChild(confirmationDiv);
-              }
+          if(!getCookie("username") == "") {
+            // console.log(getCookie("username"))
+            // console.log("if")
+            let d = {
+              "sc":shoppingCart["Product"],
+              "usr": getCookie("username") 
             }
-          })
+            $.ajax({
+              url: '/webshop/script/sendData.php',
+              type: "POST",
+              data: {data:d},
+              success: function(data) {
+                console.log(data)
+                //if data is false the user is not logged in
+                if(data == "false") {
+                  mainCardDiv.innerHTML = "";
+                  let confirmationDiv = document.createElement("div");
+                  confirmationDiv.setAttribute("style", "background-color: white");
+                  confirmationDiv.classList.add("jumbotron");
+                  confirmationDiv.classList.add("text-center");
+                  let confirmationH1 = document.createElement("h1");
+                  confirmationH1.classList.add("display-3");
+                  confirmationH1.innerHTML = "Ups... something went wrong";
+                  let confirmationP = document.createElement("p");
+                  confirmationP.innerHTML = "Please login first 🙂";
+                  confirmationH1.setAttribute("style", "color: black");
+                  confirmationP.setAttribute("style", "color: black");
+                  let buttonP = document.createElement("p");
+                  let buttonA = document.createElement("a");
+                  buttonP.classList.add("lead");
+                  buttonA.classList.add("btn");
+                  buttonA.classList.add("btn-primary");
+                  buttonA.classList.add("btn-sm");
+                  buttonA.setAttribute("role", "button");
+                  buttonA.innerHTML = "Click here to login :)";
+                  buttonA.setAttribute("href", "login.html");
+                  confirmationDiv.appendChild(confirmationH1);
+                  confirmationDiv.appendChild(confirmationP);
+                  buttonP.appendChild(buttonA);
+                  confirmationDiv.appendChild(buttonP);
+                  mainCardDiv.appendChild(confirmationDiv);
+                }
+  
+                //if data is true the order was successfully added to the database
+                if(data.substring(0,4) == "true") {
+                  mainCardDiv.innerHTML = "";
+                  let confirmationDiv = document.createElement("div");
+                  confirmationDiv.setAttribute("style", "background-color: white");
+                  confirmationDiv.classList.add("jumbotron");
+                  confirmationDiv.classList.add("text-center");
+                  let confirmationH1 = document.createElement("h1");
+                  confirmationH1.classList.add("display-3");
+                  confirmationH1.innerHTML = "Thank You";
+                  let confirmationP = document.createElement("p");
+                  confirmationP.innerHTML = "Yay, thank you for your order. We will take care that your package will be with you as soon as possible 🙂";
+                  let buttonP = document.createElement("p");
+                  let buttonA = document.createElement("a");
+                  confirmationH1.setAttribute("style", "color: black");
+                  confirmationP.setAttribute("style", "color: black");
+                  buttonP.classList.add("lead");
+                  buttonA.classList.add("btn");
+                  buttonA.classList.add("btn-primary");
+                  buttonA.classList.add("btn-sm");
+                  buttonA.setAttribute("role", "button");
+                  buttonA.innerHTML = "Continue shopping";
+                  buttonA.setAttribute("href", "index.php");
+  
+                  confirmationDiv.appendChild(confirmationH1);
+                  confirmationDiv.appendChild(confirmationP);
+                  buttonP.appendChild(buttonA);
+                  confirmationDiv.appendChild(buttonP);
+                  mainCardDiv.appendChild(confirmationDiv);
+                  
+                }
+              }
+            })
+          }else {
+            // console.log("else")
+            mainCardDiv.innerHTML = "";
+            let confirmationDiv = document.createElement("div");
+            confirmationDiv.setAttribute("style", "background-color: white");
+            confirmationDiv.classList.add("jumbotron");
+            confirmationDiv.classList.add("text-center");
+            let confirmationH1 = document.createElement("h1");
+            confirmationH1.classList.add("display-3");
+            confirmationH1.innerHTML = "Ups... something went wrong";
+            let confirmationP = document.createElement("p");
+            confirmationP.innerHTML = "Please login first 🙂";
+            confirmationH1.setAttribute("style", "color: black");
+            confirmationP.setAttribute("style", "color: black");
+            let buttonP = document.createElement("p");
+            let buttonA = document.createElement("a");
+            buttonP.classList.add("lead");
+            buttonA.classList.add("btn");
+            buttonA.classList.add("btn-primary");
+            buttonA.classList.add("btn-sm");
+            buttonA.setAttribute("role", "button");
+            buttonA.innerHTML = "Click here to login :)";
+            buttonA.setAttribute("href", "login.html");
+            confirmationDiv.appendChild(confirmationH1);
+            confirmationDiv.appendChild(confirmationP);
+            buttonP.appendChild(buttonA);
+            confirmationDiv.appendChild(buttonP);
+            mainCardDiv.appendChild(confirmationDiv);
+          }
+          // console.log("durch")
         });
 
         //click back to Shop button
@@ -622,7 +728,7 @@
 
       function deleteProductFromShoppingCart(data, bootdeyDiv, e, countDiv) {
         if(shoppingCart["Product"]["Count"][e] == 1) {
-            console.log("== 1")
+            // console.log("== 1")
             
           shoppingCart["Count"]--;
           shoppingCart["Price"].splice(e, 1);
@@ -633,7 +739,7 @@
          
         }else {
          
-          console.log("else == 1")
+          // console.log("else == 1")
           shoppingCart["Count"]--;
           shoppingCart["Product"]["Count"][e]--;
           shoppingCart["Price"].splice(e, 1);
@@ -644,10 +750,10 @@
 
     
         if(shoppingCart["Count"] == "0") {
-          console.log("goBack")
+          // console.log("goBack")
           goBack(data, e)
         }else {
-          console.log("counter über 0")
+          // console.log("counter über 0")
           shoppingCartView(bootdeyDiv, data)
         }
         
@@ -677,4 +783,4 @@
         }
       }
 
-      export { mainPage };
+      export { mainPage, wipeBootdeyDiv };

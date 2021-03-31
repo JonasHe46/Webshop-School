@@ -1,29 +1,16 @@
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>FreshTek - Login</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <?php
-        //create connection
-        include_once ("db.php");
-        session_start();
+<?php
+    $mysqli = new mysqli("localhost", "root","","webshop");
+    if($mysqli->connect_error) {
+        echo "didnt work  ";
+    }
+        // session_start();
         
-        //Checks if name and password are available.
-        if(isset($_POST["name"]) && isset($_POST["password"])){
-            $user = $_POST["name"];
-            $pass = $_POST["password"];
+        // Checks if name and password are available.
+        if(isset($_POST["data"]["user"]) && isset($_POST["data"]["pass"])){
+            $user = $_POST["data"]["user"];
+            $pass = $_POST["data"]["pass"];
+            // echo $user;
+            // echo $pass;
             //sql query
             $request = $mysqli->query("SELECT * FROM benutzer WHERE Username LIKE '$user'");
 
@@ -31,17 +18,15 @@
             while($row = $request->fetch_array()){
                 $passsql = $row["Password"];
                 if(password_verify($pass, $passsql)) {
-                    $_SESSION["name"] = $user;
-                    header("Location: index.php");
+                    // $_SESSION["name"] = $user;
+                    echo "true";
+                    // header("Location: index.php");
                 }else {
-                    exit("Wrong username or password. Please try again -> <a href='login.html'>Login</a>");
+                    echo "false";
                 }    
             }
             
         }else {
-            echo 'Something went wrong please try again --> <a href="login.html"> Login </a>';
+            echo "false";
         }
-        
-    ?>
-</body>
-</html>
+?>

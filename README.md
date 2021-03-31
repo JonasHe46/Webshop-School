@@ -5,3 +5,9 @@ Hier ist unser Webshop! :)
 
 Unser Git Repro:
 https://git.rbz-technik.de/ITF-19-B-9/webshop
+
+
+Neue Funktionen
+-delete
+-counter im Warenkorb der einzelnen Produkte
+-Warenkorb bleibt

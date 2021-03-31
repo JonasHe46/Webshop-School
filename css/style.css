@@ -222,6 +222,7 @@
     padding: 1.5%;
     border: none;
     cursor: pointer;
+    text-align: center;
 }
 .login-form-1 .btnSubmit{
     font-weight: 600;
@@ -256,6 +257,16 @@
 .RegisterBtn {
   font-weight: 600;
 }
+
+.RegisterBtn:hover {
+color: blue;
+cursor: pointer;
+}
+
+.lgf {
+  width: 150%;
+}
+
 
 .ExistAccBtn {
   font-weight: 600;
