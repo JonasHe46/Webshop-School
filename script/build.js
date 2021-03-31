@@ -1,4 +1,5 @@
 import { buildLogin, logoutFn } from "./login.js";
+import { fetchDataAsync } from "./ajax.js";
 
   //shoppingCart array
     let shoppingCart = {};
@@ -646,12 +647,19 @@ import { buildLogin, logoutFn } from "./login.js";
                   buttonA.classList.add("btn-sm");
                   buttonA.setAttribute("role", "button");
                   buttonA.innerHTML = "Click here to login :)";
-                  buttonA.setAttribute("href", "login.html");
+                 
                   confirmationDiv.appendChild(confirmationH1);
                   confirmationDiv.appendChild(confirmationP);
                   buttonP.appendChild(buttonA);
                   confirmationDiv.appendChild(buttonP);
                   mainCardDiv.appendChild(confirmationDiv);
+
+
+                  buttonA.addEventListener("click", function() {
+                    document.getElementById("footer").remove();
+                    document.getElementById("bootdeyDiv").remove();
+                    fetchDataAsync('/webshop/script/getData.php');
+                  });
                 }
   
                 //if data is true the order was successfully added to the database
@@ -709,12 +717,20 @@ import { buildLogin, logoutFn } from "./login.js";
             buttonA.classList.add("btn-sm");
             buttonA.setAttribute("role", "button");
             buttonA.innerHTML = "Click here to login :)";
-            buttonA.setAttribute("href", "login.html");
+           
             confirmationDiv.appendChild(confirmationH1);
             confirmationDiv.appendChild(confirmationP);
             buttonP.appendChild(buttonA);
             confirmationDiv.appendChild(buttonP);
             mainCardDiv.appendChild(confirmationDiv);
+
+
+        buttonA.addEventListener("click", function() {          
+          document.getElementById("footer").remove();
+          document.getElementById("bootdeyDiv").remove();
+          fetchDataAsync('/webshop/script/getData.php');
+
+        });
           }
           // console.log("durch")
         });
@@ -723,6 +739,7 @@ import { buildLogin, logoutFn } from "./login.js";
         backToShopBtn.addEventListener('click', function(){
           goBack(data);
         });
+
       }
 
 
