@@ -4,6 +4,7 @@
     shoppingCart["Product"] = {};
     shoppingCart["Product"]["Name"] = [];
     shoppingCart["Product"]["Price"] = [];
+    shoppingCart["Product"]["Count"] = [];
     shoppingCart["Price"] = [];
     
     //main Function to build the dynamic Page
@@ -295,7 +296,7 @@
         bootdeyDiv.appendChild(productSection);
 
         arrowLeftBtn.addEventListener('click', function(){
-          goBack(data, bootdeyDiv, a_IDS)
+          goBack(data, a_IDS)
         });
 
         button.addEventListener('click', function(){
@@ -305,13 +306,35 @@
 
 
       function addToShoppingCart(data, a_IDS, bootdeyDiv) {
+        if(shoppingCart["Product"]["Name"].includes(data["Artikel"]["A_Name"][a_IDS])) {
+    
+          Object.keys(shoppingCart["Product"]["Name"]).forEach(el => {
+            if(shoppingCart["Product"]["Name"][el] == data["Artikel"]["A_Name"][a_IDS]) {
+              shoppingCart["Product"]["Count"][el]++;
+            }
+           
+          })
+          
+        }else {
+          
+          //add element to array
+        shoppingCart["Product"]["Name"].push(data["Artikel"]["A_Name"][a_IDS]);
+        shoppingCart["Product"]["Price"].push(data["Artikel"]["A_Preis"][a_IDS]);
+        shoppingCart["Product"]["Count"].push(1);
+        // document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
+        // console.log("aID: ", a_IDS)
+        // console.log("name nicht in array", shoppingCart)
+        }
+
         if(document.getElementById("cartCount")) {
+          // console.log("cartCound vorhanden")
           //count entire Products array Counter
           shoppingCart["Count"]++;
           //add element to array;
           shoppingCart["Price"].push(parseFloat(data["Artikel"]["A_Preis"][a_IDS]));
           document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
         }else {
+          // console.log("cartCound nicht vorhanden")
           // Create elements and set attributes
           let shoppingCartLi = document.getElementById("shoppingCartLi");
           let number = document.createElement("span");
@@ -331,9 +354,6 @@
             shoppingCartView(bootdeyDiv, data);
           });
         }
-        //add element to array
-        shoppingCart["Product"]["Name"].push(data["Artikel"]["A_Name"][a_IDS]);
-        shoppingCart["Product"]["Price"].push(data["Artikel"]["A_Preis"][a_IDS]);
         
       }
 
@@ -405,7 +425,7 @@
           rowMainAlignDiv.classList.add("main");
           rowMainAlignDiv.classList.add("align-items-center");
           let imgDiv = document.createElement("div");
-          imgDiv.classList.add("col-md-5");
+          imgDiv.classList.add("col-md-4");
           let img = document.createElement("img");
           img.setAttribute("alt", shoppingCart["Product"]["Name"][e]);
           img.setAttribute("src", "img/" + shoppingCart["Product"]["Name"][e] + ".png");
@@ -429,10 +449,10 @@
           let deleteBtnSpan = document.createElement("span");
           deleteBtnSpan.innerHTML = "&times;";
           deleteBtnSpan.classList.add("deleteBtn");
-          // <span aria-hidden="true">&times;</span>
-          
-          // eventuell delete
-          // let priceSpan = document.createElement("span");
+        
+          let countDiv = document.createElement("div");
+          countDiv.classList.add("col-md-1");
+          countDiv.innerHTML = shoppingCart["Product"]["Count"][e];
         
           // append elements from my shoppingCart to my CartView
           imgDiv.appendChild(img);
@@ -442,13 +462,15 @@
           rowMainAlignDiv.appendChild(priceDiv);
          
           deleteBtnDiv.appendChild(deleteBtnSpan);
+
+          rowMainAlignDiv.appendChild(countDiv);
           rowMainAlignDiv.appendChild(deleteBtnDiv);
           ProductRowDiv.appendChild(rowMainAlignDiv);
           colDiv.appendChild(ProductRowDiv);
 
           //click to delete element from shoppingCart
           deleteBtnSpan.addEventListener('click', function(){
-            deleteProductFromShoppingCart(data, bootdeyDiv, e);
+            deleteProductFromShoppingCart(data, bootdeyDiv, e, countDiv);
           });
         })
         //calculate total price
@@ -593,24 +615,47 @@
 
         //click back to Shop button
         backToShopBtn.addEventListener('click', function(){
-          goBack(data, bootdeyDiv);
+          goBack(data);
         });
       }
 
 
-      function deleteProductFromShoppingCart(data, bootdeyDiv, e) {
-        shoppingCart["Count"]--;
-        shoppingCart["Price"].splice(e, 1);
-        shoppingCart["Price"] - shoppingCart["Product"]["Price"][e]
-        shoppingCart["Product"]["Name"].splice(e, 1);
-        shoppingCart["Product"]["Price"].splice(e,1);
+      function deleteProductFromShoppingCart(data, bootdeyDiv, e, countDiv) {
+        if(shoppingCart["Product"]["Count"][e] == 1) {
+            console.log("== 1")
+            
+          shoppingCart["Count"]--;
+          shoppingCart["Price"].splice(e, 1);
+          // shoppingCart["Price"] - shoppingCart["Product"]["Price"][e]
+          shoppingCart["Product"]["Name"].splice(e, 1);
+          shoppingCart["Product"]["Price"].splice(e,1);
+          document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
+         
+        }else {
+         
+          console.log("else == 1")
+          shoppingCart["Count"]--;
+          shoppingCart["Product"]["Count"][e]--;
+          shoppingCart["Price"].splice(e, 1);
+          document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
+          // countDiv.innerHTML = shoppingCart["Product"]["Count"][e];
+      
+        }
+
     
-        shoppingCartView(bootdeyDiv, data)
+        if(shoppingCart["Count"] == "0") {
+          console.log("goBack")
+          goBack(data, e)
+        }else {
+          console.log("counter über 0")
+          shoppingCartView(bootdeyDiv, data)
+        }
+        
 
       }
 
       //goBack ensures that the previous page is called up
-      function goBack(data, bootdeyDiv, a_IDS) {
+      function goBack(data, a_IDS) {
           document.getElementById("footer").remove();
           document.getElementById("bootdeyDiv").remove();
           mainPage(data, data["Artikel"]["A_KategorieID"][a_IDS]);

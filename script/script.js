@@ -27,6 +27,9 @@ $(document).ready(function(){
     });
     })
     
+    function MyFunction() {
+      alert("test")
+    }
     
     
     function datenschutzBanner() {
