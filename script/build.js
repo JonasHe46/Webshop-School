@@ -413,7 +413,7 @@
           // img.classList.add("z-depth-1");
           img.classList.add("maxWidth2");
           let titleDiv = document.createElement("div");
-          titleDiv.classList.add("col-md-5");
+          titleDiv.classList.add("col-md-3");
           titleDiv.classList.add("align-items-center");
           let title = document.createElement("div");
           title.classList.add("row");
@@ -422,6 +422,14 @@
           priceDiv.classList.add("col-md-2");
           priceDiv.classList.add("align-items-center");
           priceDiv.innerHTML = "$" + shoppingCart["Product"]["Price"][e];
+          let deleteBtnDiv = document.createElement("div");
+          deleteBtnDiv.classList.add("col-md-2");
+          deleteBtnDiv.classList.add("align-items-center");
+          deleteBtnDiv.classList.add("close");
+          let deleteBtnSpan = document.createElement("span");
+          deleteBtnSpan.innerHTML = "&times;";
+          deleteBtnSpan.classList.add("deleteBtn");
+          // <span aria-hidden="true">&times;</span>
           
           // eventuell delete
           // let priceSpan = document.createElement("span");
@@ -432,8 +440,16 @@
           rowMainAlignDiv.appendChild(imgDiv);
           rowMainAlignDiv.appendChild(titleDiv);
           rowMainAlignDiv.appendChild(priceDiv);
+         
+          deleteBtnDiv.appendChild(deleteBtnSpan);
+          rowMainAlignDiv.appendChild(deleteBtnDiv);
           ProductRowDiv.appendChild(rowMainAlignDiv);
           colDiv.appendChild(ProductRowDiv);
+
+          //click to delete element from shoppingCart
+          deleteBtnSpan.addEventListener('click', function(){
+            deleteProductFromShoppingCart(data, bootdeyDiv, e);
+          });
         })
         //calculate total price
         const totalPriceConst = shoppingCart["Price"].reduce((partial_sum, a) => partial_sum + a,0); 
@@ -581,7 +597,18 @@
         });
       }
 
+
+      function deleteProductFromShoppingCart(data, bootdeyDiv, e) {
+        shoppingCart["Count"]--;
+        shoppingCart["Price"].splice(e, 1);
+        shoppingCart["Price"] - shoppingCart["Product"]["Price"][e]
+        shoppingCart["Product"]["Name"].splice(e, 1);
+        shoppingCart["Product"]["Price"].splice(e,1);
     
+        shoppingCartView(bootdeyDiv, data)
+
+      }
+
       //goBack ensures that the previous page is called up
       function goBack(data, bootdeyDiv, a_IDS) {
           document.getElementById("footer").remove();

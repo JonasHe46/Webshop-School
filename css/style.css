@@ -686,3 +686,12 @@ a:hover {
   background-position-x: 95%;
   background-position-y: center
 }
+
+
+
+.deleteBtn {
+  /* width: 200%; */
+  color: #000;
+  font-size: 4em;
+  text-align: center;
+}
