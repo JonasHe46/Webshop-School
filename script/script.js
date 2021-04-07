@@ -42,7 +42,7 @@ $(document).ready(function(){
     
     ajaxRequest();
 
-    fetchDataAsync('/webshop/script/getData.php');
+    fetchDataAsync('/Webshop-School/script/getData.php');
 
 
 

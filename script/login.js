@@ -191,22 +191,22 @@ function registerFn() {
     goToLoginBtn.addEventListener("click", function() { 
         document.getElementById("footer").remove();
         document.getElementById("bootdeyDiv").remove();
-        fetchDataAsync('/webshop/script/getData.php');
+        fetchDataAsync('/Webshop-School/script/getData.php');
     })
 
     submitInput.addEventListener("click", function() {
         let d = {
             "name": userInput.value,
-        "pass" :passInput.value,
-        "passre" : passReInput.value,
-        "street" : streetInput.value,
-        "number" : numberInput.value,
-        "plz" : plzInput.value,
-        "city" : cityInput.value
+            "pass" :passInput.value,
+            "passre" : passReInput.value,
+            "street" : streetInput.value,
+            "number" : numberInput.value,
+            "plz" : plzInput.value,
+            "city" : cityInput.value
         }
         console.log(d);
         $.ajax({
-            url: '/webshop/createuser.php',
+            url: '/Webshop-School/createuser.php',
             type: "POST",
             data: {data: d},
             success: function(data) { 
@@ -220,7 +220,7 @@ function registerFn() {
                 
                     document.getElementById("footer").remove();
                     document.getElementById("bootdeyDiv").remove();
-                    fetchDataAsync('/webshop/script/getData.php');
+                    fetchDataAsync('/Webshop-School/script/getData.php');
                     alert("Juhu, you are now ready to login")
                 }
     
@@ -246,7 +246,7 @@ let d = {
     "pass": pass
 }
     $.ajax({
-        url: '/webshop/login.php',
+        url: '/Webshop-School/login.php',
         type: "POST",
         data: {data: d},
         success: function(data) { 
@@ -258,7 +258,7 @@ let d = {
                 document.getElementById("loginBtn").innerHTML ="Logout";
                 document.getElementById("footer").remove();
                 document.getElementById("bootdeyDiv").remove();
-                fetchDataAsync('/webshop/script/getData.php');
+                fetchDataAsync('/Webshop-School/script/getData.php');
             }
 
             if(data == "") {

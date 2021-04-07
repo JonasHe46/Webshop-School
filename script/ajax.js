@@ -4,7 +4,7 @@ import { mainPage } from "./build.js";
 function ajaxRequest() {
         var data = new FormData();
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', "/webshop/script/getData.php");
+        xhr.open('POST', "/Webshop-School/script/getData.php");
         xhr.onload = function () {
           //console.log(this.response);
         };

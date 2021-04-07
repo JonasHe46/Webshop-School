@@ -18,9 +18,7 @@
             while($row = $request->fetch_array()){
                 $passsql = $row["Password"];
                 if(password_verify($pass, $passsql)) {
-                    // $_SESSION["name"] = $user;
                     echo "true";
-                    // header("Location: index.php");
                 }else {
                     echo "false";
                 }    

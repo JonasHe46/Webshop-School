@@ -620,7 +620,7 @@ import { fetchDataAsync } from "./ajax.js";
               "usr": getCookie("username") 
             }
             $.ajax({
-              url: '/webshop/script/sendData.php',
+              url: '/Webshop-School/script/sendData.php',
               type: "POST",
               data: {data:d},
               success: function(data) {
@@ -658,7 +658,7 @@ import { fetchDataAsync } from "./ajax.js";
                   buttonA.addEventListener("click", function() {
                     document.getElementById("footer").remove();
                     document.getElementById("bootdeyDiv").remove();
-                    fetchDataAsync('/webshop/script/getData.php');
+                    fetchDataAsync('/Webshop-School/script/getData.php');
                   });
                 }
   
@@ -684,7 +684,7 @@ import { fetchDataAsync } from "./ajax.js";
                   buttonA.classList.add("btn-sm");
                   buttonA.setAttribute("role", "button");
                   buttonA.innerHTML = "Continue shopping";
-                  buttonA.setAttribute("href", "index.php");
+                  buttonA.setAttribute("href", "index.html");
   
                   confirmationDiv.appendChild(confirmationH1);
                   confirmationDiv.appendChild(confirmationP);
@@ -728,7 +728,7 @@ import { fetchDataAsync } from "./ajax.js";
         buttonA.addEventListener("click", function() {          
           document.getElementById("footer").remove();
           document.getElementById("bootdeyDiv").remove();
-          fetchDataAsync('/webshop/script/getData.php');
+          fetchDataAsync('/Webshop-School/script/getData.php');
 
         });
           }
