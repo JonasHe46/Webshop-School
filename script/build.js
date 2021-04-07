@@ -1,6 +1,4 @@
 import { buildLogin, logoutFn } from "./login.js";
-import { fetchDataAsync } from "./ajax.js";
-
 
   //shoppingCart array
     let shoppingCart = {};
@@ -618,9 +616,6 @@ import { fetchDataAsync } from "./ajax.js";
 
 
                   buttonA.addEventListener("click", function() {
-                    // document.getElementById("footer").remove();
-                    // document.getElementById("bootdeyDiv").remove();
-                    // fetchDataAsync('/webshop/script/getData.php');
                     wipeBootdeyDiv();
                     buildLogin();
                   });
