@@ -1,2 +1,2 @@
 Teck Webshop dynamic with sql
-![Screenshot](readmeimg/Landignpage1.PNG)
+![](readmeimg/Landignpage1.png)
