@@ -24,11 +24,11 @@ if($pass == $passrep){
             echo 'false';
         }
     } else {
-        echo 'false';
+        echo 'user';
     }
        
 } else {
-    exit('The entered passwords do not match. Please try again -> <a href="register.html">register</a>');
+    exit('pass');
 }
 
 ?>

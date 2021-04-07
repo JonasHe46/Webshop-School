@@ -1,5 +1,4 @@
 import { buildLogin, logoutFn } from "./login.js";
-import { fetchDataAsync } from "./ajax.js";
 
   //shoppingCart array
     let shoppingCart = {};
@@ -43,44 +42,14 @@ import { fetchDataAsync } from "./ajax.js";
 
         document.getElementById("loginBtn").addEventListener("click", function() {
           if(!getCookie("username") == "") {
-            // console.log("logout");
             logoutFn();
           }
           if(getCookie("username") == "") {
-            // console.log("login")
             document.getElementById("carousel").classList.add("dNone");
                   wipeBootdeyDiv();
                   buildLogin();
           }
         })
-    
-        // if(!getCookie("username") == "") {
-        //   document.getElementById("loginBtn").innerHTML = "Logout";
-        //   document.getElementById("loginBtn").addEventListener("click", function() {
-        //     // alert("login")
-        //     console.log(document.getElementById("loginBtn").value)
-
-        //       logoutFn();
-            
-            
-        //   })
-        // }else {
-        //   document.getElementById("loginBtn").addEventListener("click", function() {
-        //     // alert("login")
-        //     console.log(document.getElementById("loginBtn").value)
-     
-            
-        //       document.getElementById("carousel").classList.add("dNone");
-        //       wipeBootdeyDiv();
-        //       buildLogin();
-            
-            
-        //   })
-        // }
-
-      
-
-       
 
       }
 
@@ -388,20 +357,15 @@ import { fetchDataAsync } from "./ajax.js";
         shoppingCart["Product"]["Name"].push(data["Artikel"]["A_Name"][a_IDS]);
         shoppingCart["Product"]["Price"].push(data["Artikel"]["A_Preis"][a_IDS]);
         shoppingCart["Product"]["Count"].push(1);
-        // document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
-        // console.log("aID: ", a_IDS)
-        // console.log("name nicht in array", shoppingCart)
         }
 
         if(document.getElementById("cartCount")) {
-          // console.log("cartCound vorhanden")
           //count entire Products array Counter
           shoppingCart["Count"]++;
           //add element to array;
           shoppingCart["Price"].push(parseFloat(data["Artikel"]["A_Preis"][a_IDS]));
           document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
         }else {
-          // console.log("cartCound nicht vorhanden")
           // Create elements and set attributes
           let shoppingCartLi = document.getElementById("shoppingCartLi");
           let number = document.createElement("span");
@@ -609,12 +573,9 @@ import { fetchDataAsync } from "./ajax.js";
 
         //click Checkout button.
         checkoutBtn.addEventListener("click", function() {
-          // console.log("click")
           //call Php to send order to the sql Db
           //DATA = send parameter from js to php
           if(!getCookie("username") == "") {
-            // console.log(getCookie("username"))
-            // console.log("if")
             let d = {
               "sc":shoppingCart["Product"],
               "usr": getCookie("username") 
@@ -624,7 +585,6 @@ import { fetchDataAsync } from "./ajax.js";
               type: "POST",
               data: {data:d},
               success: function(data) {
-                console.log(data)
                 //if data is false the user is not logged in
                 if(data == "false") {
                   mainCardDiv.innerHTML = "";
@@ -656,9 +616,8 @@ import { fetchDataAsync } from "./ajax.js";
 
 
                   buttonA.addEventListener("click", function() {
-                    document.getElementById("footer").remove();
-                    document.getElementById("bootdeyDiv").remove();
-                    fetchDataAsync('/Webshop-School/script/getData.php');
+                    wipeBootdeyDiv();
+                    buildLogin();
                   });
                 }
   
@@ -696,7 +655,6 @@ import { fetchDataAsync } from "./ajax.js";
               }
             })
           }else {
-            // console.log("else")
             mainCardDiv.innerHTML = "";
             let confirmationDiv = document.createElement("div");
             confirmationDiv.setAttribute("style", "background-color: white");
@@ -726,13 +684,10 @@ import { fetchDataAsync } from "./ajax.js";
 
 
         buttonA.addEventListener("click", function() {          
-          document.getElementById("footer").remove();
-          document.getElementById("bootdeyDiv").remove();
-          fetchDataAsync('/Webshop-School/script/getData.php');
-
+          wipeBootdeyDiv();
+          buildLogin();
         });
           }
-          // console.log("durch")
         });
 
         //click back to Shop button
@@ -745,32 +700,23 @@ import { fetchDataAsync } from "./ajax.js";
 
       function deleteProductFromShoppingCart(data, bootdeyDiv, e, countDiv) {
         if(shoppingCart["Product"]["Count"][e] == 1) {
-            // console.log("== 1")
-            
           shoppingCart["Count"]--;
           shoppingCart["Price"].splice(e, 1);
-          // shoppingCart["Price"] - shoppingCart["Product"]["Price"][e]
           shoppingCart["Product"]["Name"].splice(e, 1);
           shoppingCart["Product"]["Price"].splice(e,1);
           document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
          
         }else {
-         
-          // console.log("else == 1")
           shoppingCart["Count"]--;
           shoppingCart["Product"]["Count"][e]--;
           shoppingCart["Price"].splice(e, 1);
           document.getElementById("cartCount").innerHTML = shoppingCart["Count"];
-          // countDiv.innerHTML = shoppingCart["Product"]["Count"][e];
-      
         }
 
     
         if(shoppingCart["Count"] == "0") {
-          // console.log("goBack")
           goBack(data, e)
         }else {
-          // console.log("counter über 0")
           shoppingCartView(bootdeyDiv, data)
         }
         

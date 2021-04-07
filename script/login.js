@@ -80,7 +80,7 @@ function buildLogin() {
 
 
 function registerFn() {
-
+    //create elements and set atributes
     let registerDiv = document.createElement("div");
     registerDiv.classList.add("container");
     registerDiv.classList.add("login-container");
@@ -98,6 +98,7 @@ function registerFn() {
     userInput.setAttribute("placeholder", "Your Name");
     userInput.setAttribute("required", "");
     userInput.setAttribute("type", "text");
+    userInput.setAttribute("name", "name");
 
     let passDiv = document.createElement("div");
     passDiv.classList.add("form-group");
@@ -106,6 +107,7 @@ function registerFn() {
     passInput.setAttribute("placeholder", "Your Password");
     passInput.setAttribute("required", "");
     passInput.setAttribute("type", "password");
+    passInput.setAttribute("name", "password");
 
     let passReDiv = document.createElement("div");
     passReDiv.classList.add("form-group");
@@ -125,11 +127,13 @@ function registerFn() {
     streetInput.classList.add("form-control");
     streetInput.classList.add("col");
     streetInput.setAttribute("placeholder", "Street");
+    streetInput.setAttribute("type", "text");
     streetInput.setAttribute("required", "");
     let numberInput = document.createElement("input");
     numberInput.classList.add("form-control");
     numberInput.classList.add("col");
     numberInput.setAttribute("placeholder", "Housenumber");
+    numberInput.setAttribute("type", "number");
     numberInput.setAttribute("required", "");
   
 
@@ -141,20 +145,25 @@ function registerFn() {
     plzInput.classList.add("form-control");
     plzInput.classList.add("col");
     plzInput.setAttribute("placeholder", "PLZ");
+    plzInput.setAttribute("type", "number");
     plzInput.setAttribute("required", "");
     let cityInput = document.createElement("input");
     cityInput.classList.add("form-control");
     cityInput.classList.add("col");
     cityInput.setAttribute("placeholder", "City");
+    cityInput.setAttribute("type", "text");
     cityInput.setAttribute("required", "");
 
     let submitDiv = document.createElement("div");
     submitDiv.classList.add("form-group");
-    let submitInput = document.createElement("btn");  
+    let submitInput = document.createElement("input");  
     submitInput.classList.add("btnSubmit");
-    submitInput.classList.add("lgf");
-    submitInput.innerHTML = "REGISTER"
+    // submitInput.classList.add("lgf");
+    submitInput.setAttribute("value","REGISTER");
     submitInput.setAttribute("type", "submit");
+    submitInput.setAttribute("name", "submit");
+    // submitInput.setAttribute("style", "width: 100%");
+
     
     let goToLogin = document.createElement("div");
     goToLogin.classList.add("form-group");
@@ -164,6 +173,9 @@ function registerFn() {
 
     loginFormDiv.classList.add("lgf");
 
+    form.setAttribute("onsubmit", "return false")
+
+    //append elements do DOM
     loginFormDiv.appendChild(h3);
     userDiv.appendChild(userInput);
     form.appendChild(userDiv);
@@ -188,13 +200,16 @@ function registerFn() {
     registerDiv.appendChild(rowDiv);
     document.getElementById("bootdeyDiv").appendChild(registerDiv);
 
+    //goToLogin Btn
     goToLoginBtn.addEventListener("click", function() { 
         document.getElementById("footer").remove();
         document.getElementById("bootdeyDiv").remove();
         fetchDataAsync('/Webshop-School/script/getData.php');
     })
 
+    //send registration btn
     submitInput.addEventListener("click", function() {
+       
         let d = {
             "name": userInput.value,
             "pass" :passInput.value,
@@ -204,76 +219,87 @@ function registerFn() {
             "plz" : plzInput.value,
             "city" : cityInput.value
         }
-        console.log(d);
-        $.ajax({
-            url: '/Webshop-School/createuser.php',
-            type: "POST",
-            data: {data: d},
-            success: function(data) { 
-                console.log(data)
+        if(userInput.value != "" && passInput.value != "" && passReInput.value != "" && streetInput.value != "" && numberInput.value != "" && plzInput.value != "" && cityInput.value != "") {
+            $.ajax({
+                url: '/webshop/createuser.php',
+                type: "POST",
+                data: {data: d},
+                success: function(data) {       
+                    if(data == "true") {
+                       
+                        document.getElementById("carousel").classList.remove("dNone");
                 
-                
-                if(data == "true") {
-                   
-                    document.getElementById("carousel").classList.remove("dNone");
-            
-                
-                    document.getElementById("footer").remove();
-                    document.getElementById("bootdeyDiv").remove();
-                    fetchDataAsync('/Webshop-School/script/getData.php');
-                    alert("Juhu, you are now ready to login")
+                    
+                        document.getElementById("footer").remove();
+                        document.getElementById("bootdeyDiv").remove();
+                        fetchDataAsync('/webshop/script/getData.php');
+                        alert("Juhu, you are now ready to login")
+                    }
+        
+                    if(data == "false") {
+                        alert("wrong login data. Please try again :)");
+                    }
+                    if(data == "") {
+                        alert("wrong login data. Please try again :)");
+                    }
+
+                    if(data == "pass") {
+                        alert("The entered passwords do not match. Please try again :)");
+                    }
+        
+                    if(data == "user") {
+                        alert("This username already exists. Please try again :)")
+                    }
                 }
-    
-                if(data == "false") {
-                    alert("wrong login data. Please try again :)");
-                }
-                if(data == "") {
-                    alert("wrong login data. Please try again :)");
-                }
-    
-            }
-        })
+            })
+        }
+       
     })
 
-   
+  
 }
 
 
 function loginFn(user, pass) {
-// console.log("test: ", user, pass)
+
 let d = {
     "user": user,
     "pass": pass
 }
-    $.ajax({
-        url: '/Webshop-School/login.php',
-        type: "POST",
-        data: {data: d},
-        success: function(data) { 
-            console.log(data)
-
-            if(data == "true") {
-                document.cookie = "username=" + user;
-                document.getElementById("carousel").classList.remove("dNone");
-                document.getElementById("loginBtn").innerHTML ="Logout";
-                document.getElementById("footer").remove();
-                document.getElementById("bootdeyDiv").remove();
-                fetchDataAsync('/Webshop-School/script/getData.php');
+    if( user != "" && pass != "" ) {
+        $.ajax({
+            url: '/Webshop-School/login.php',
+            type: "POST",
+            data: {data: d},
+            success: function(data) {
+                if(data == "true") {
+                    document.cookie = "username=" + user;
+                    document.getElementById("carousel").classList.remove("dNone");
+                    document.getElementById("loginBtn").innerHTML ="Logout";
+                    document.getElementById("footer").remove();
+                    document.getElementById("bootdeyDiv").remove();
+                    fetchDataAsync('/Webshop-School/script/getData.php');
+                }
+    
+                if(data == "") {
+                    alert("wrong username or password. Please try again :)");
+                }
+    
+                if(data == "false") {
+                    alert("wrong username or password. Please try again :)");
+                }
+                
+             
             }
-
-            if(data == "") {
-                alert("wrong login data. Please try again :)");
-            }
-
-        }
-    })
+        })
+    }
+    
 }
 
 
 function logoutFn() {
     document.cookie = "username= ;";
     document.getElementById("loginBtn").innerHTML ="Login";
-    // console.log("logout")
 }
 
 export { buildLogin, logoutFn }
