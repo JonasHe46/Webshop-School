@@ -1,2 +1,2 @@
-Teck Webshop dynamic with sql
-![](readmeimg/Landignpage1.png)
+Webshop dynamic with sql
+![](https://github.com/JonasHe46/Webshop-School/blob/master/readmeImg/Categories1.PNGTeck)
