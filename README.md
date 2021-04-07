@@ -1,6 +1,7 @@
 Here is a small overview of my website. :slightly_smiling_face:
 
 - [x] All functions work rudimentarily 
+- [ ] Improve little things in the design
 - [ ] better way to check login and logout
 - [ ] no more PHP and mysql
 - [ ] Python Rest APi
