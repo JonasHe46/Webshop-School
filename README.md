@@ -24,7 +24,7 @@ The shopping cart looks like this.
 Here we have a working login. The data is also retrieved from the database.
 ![](/readmeImg/Login.PNG)
 
-Where there is a login, there must be a register.
+register.
 ![](/readmeImg/register.PNG)
 
 There are a few other nice little things but this is what it is. :)
